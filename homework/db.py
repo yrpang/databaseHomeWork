@@ -1,4 +1,4 @@
-import sqlite3
+import mysql.connector as mysqlcon
 
 import click
 from flask import current_app, g
@@ -7,13 +7,14 @@ from flask.cli import with_appcontext
 
 def get_db():
     if 'db' not in g:
-        g.db = sqlite3.connect(
-            current_app.config['DATABASE'],
-            detect_types=sqlite3.PARSE_DECLTYPES
+        g.db = mysqlcon.connect(
+            user='root', password=None,
+            host='127.0.0.1',
+            database='st'
         )
-        g.db.row_factory = sqlite3.Row
+        g.cur = g.db.cursor()
 
-    return g.db
+    return g.cur
 
 
 def close_db(e=None):
@@ -24,10 +25,15 @@ def close_db(e=None):
 
 
 def init_db():
-    db = get_db()
-
+    cur = get_db()
     with current_app.open_resource('schema.sql') as f:
-        db.executescript(f.read().decode('utf8'))
+        sql_list = f.read().split(b';')[:-1]
+        for x in sql_list:
+            if b'\n' in x:
+                x = x.replace(b'\n', b'')
+
+            sql_item = x.decode() + ";"
+            cur.execute(sql_item)
 
 
 @click.command('init-db')

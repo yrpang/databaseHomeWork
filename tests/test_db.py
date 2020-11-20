@@ -1,18 +1,16 @@
-import sqlite3
-
 import pytest
 from homework.db import get_db
 
 
 def test_get_close_db(app):
     with app.app_context():
-        db = get_db()
-        assert db is get_db()
+        cur = get_db()
+        assert cur is get_db()
 
-    with pytest.raises(sqlite3.ProgrammingError) as e:
-        db.execute('SELECT 1')
+    with pytest.raises(ReferenceError) as e:
+        cur.execute('SELECT 1')
 
-    assert 'closed' in str(e.value)
+    assert 'weakly-referenced' in str(e.value)
 
 
 def test_init_db_command(runner, monkeypatch):
