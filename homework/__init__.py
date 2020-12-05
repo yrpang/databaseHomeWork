@@ -30,8 +30,11 @@ def create_app(test_config=None):
     from . import db
     db.init_app(app)
 
-    from . import api
-    app.register_blueprint(api.bp)
+    from .api import api_bp
+    app.register_blueprint(api_bp)
+
+    @app.route('/')
+    def hello():
+        return '环境配置正常，请开始开发，不要忘记DDL！'
 
     return app
-
