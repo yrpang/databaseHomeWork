@@ -1,2 +1,0 @@
-include homework/schema.sql
-global-exclude *.pyc

@@ -8,13 +8,15 @@ from flask.cli import with_appcontext
 def get_db():
     if 'db' not in g:
         g.db = mysqlcon.connect(
-            user='root', password=None,
-            host='127.0.0.1',
-            database='st'
+            user=current_app.config['DATABASE_USER'],
+            password=current_app.config['DATABASE_PASSWD'],
+            host=current_app.config['DATABASE_HOST'],
+            database=current_app.config['DATABASE_NAME'],
+            port=current_app.config['DATABASE_PORT']
         )
-        g.cur = g.db.cursor()
+        g.db.cur = g.db.cursor()
 
-    return g.cur
+    return g.db
 
 
 def close_db(e=None):
@@ -25,7 +27,7 @@ def close_db(e=None):
 
 
 def init_db():
-    cur = get_db()
+    cur = get_db().cur
     with current_app.open_resource('schema.sql') as f:
         sql_list = f.read().split(b';')[:-1]
         for x in sql_list:
