@@ -61,3 +61,10 @@ mysql -h cdb-n3duly12.bj.tencentcdb.com -u root -P 10065 -p
 ## 4. 任务分工
 
 
+## 5. 基本指南
+
+1. `git clone https://github.com/yrpang/databaseHomeWork.git`
+2. 进入项目文件夹
+3. `pip install -r requirements.txt`
+4. 验证环境配置 `export FLASK_APP=homework` `flask run`
+5. 打开`homework/api.py` 所有开发任务均在里面完成
