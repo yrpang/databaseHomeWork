@@ -5,7 +5,7 @@ emmm因为我不懂其它的东西，所以项目定位为一个web项目，前�
 
 ### 任务
 
-前端小程序、后端整体框架由 @yrpang 完成，数据库设计大家一同完成，具体功能实现在[#4-任务分工](#4-任务分工)部分认领自己的开发任务分工完成，`clone` 本仓库在自己的电脑完成自己负责部分的开发，手工进行充分测试后，`commit`并直接`push`到本仓库。
+前端小程序、后端整体框架由 @yrpang 完成，数据库设计大家一同完成，具体功能实现在[4-任务分工](#4-任务分工)部分认领自己的开发任务分工完成，`clone` 本仓库在自己的电脑完成自己负责部分的开发，手工进行充分测试后，`commit`并直接`push`到本仓库。
 
 因为项目人数非常少，并且对大家完全充分信任，所以仓库给每个人完全访问权限，不需要提交 `Pull Request` ，直接 `push` 即可，请大家在操作前简单了解 `git` 的基本使用方法，另外出于安全考虑**禁止**使用 `--force` 选项，如果遇到无法解决的问题请联系我，不要 `--force` ！！！
 
@@ -54,7 +54,7 @@ mysql -h cdb-n3duly12.bj.tencentcdb.com -u root -P 10065 -p
 - 微信小程序开发; 负责人: @yrpang DDL: 待定，根据接口协调情况确定
 - 数据库整体方案设计; 负责人: <全体> 定稿DDL: `(12月6日 周日 23:59)`
 - 按照下面[任务分工](#4-任务分工)完成各功能api的实现
-- 第一版完成; DDL: `(12月10日 周 18:00)`
+- 第一版完成; DDL: `(12月10日 周四 18:00)`
 
 注: 上面时间均为北京时间(UTC/GMT+08:00)
 
@@ -65,6 +65,6 @@ mysql -h cdb-n3duly12.bj.tencentcdb.com -u root -P 10065 -p
 
 1. `git clone https://github.com/yrpang/databaseHomeWork.git`
 2. 进入项目文件夹
-3. `pip install -r requirements.txt`
-4. 验证环境配置 `export FLASK_APP=homework` `flask run`
-5. 打开`homework/api.py` 所有开发任务均在里面完成
+3. `pip install -r requirements.txt` 如果有报错进行相应处理
+4. 验证环境配置 `python3 run.py`，之后打开`http://127.0.0.1:5000`，显示成功即为配置完成
+5. 打开`homework/api.py`进行相应开发，只需要关心这一个文件，其它可以不用管
