@@ -1,5 +1,6 @@
 import os
 from flask import Flask
+from flask.globals import current_app
 
 
 def create_app(test_config=None):
@@ -35,6 +36,9 @@ def create_app(test_config=None):
 
     @app.route('/')
     def hello():
-        return '环境配置正常，请开始开发，不要忘记DDL！'
+        if(app.config.get('SHOWINFO', None)):
+            return '环境配置正常，请开始开发，不要忘记DDL！'
+        else:
+            return '线上环境'
 
     return app
