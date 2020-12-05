@@ -72,44 +72,44 @@ mysql -h cdb-n3duly12.bj.tencentcdb.com -u root -P 10065 -p
 
 ### 班级管理
 
-- `/class/add` POST {'data': {'classNo': <string>, 'className': <string>, 'classYear':<int>, 'departNo': <int>, 'classNum': <int>}}
+- `/class/add` POST {'data': {'classNo': '<string>', 'className': '<string>', 'classYear':'<int>', 'departNo': '<int>', 'classNum': '<int>'}}
 - `/class/edit` POST 
-- `/class/del` POST {'data': {'classNo' <string>}} **级连删除**
+- `/class/del` POST {'data': {'classNo' '<string>'}} **级连删除**
 - `/class/get/all` GET 返回值{'errCode':0, 'status':'OK', 'data': [...班级基本信息列表]}
 - `/class/get/<classNo>` GET 返回值{'errCode':0, 'status':'OK', 'data': [...班级具体信息列表]}
 
 
 ### 系管理
 
-- `/depart/add` POST {'data': {'departNo': <string>, 'departName': <string>, 'departOffice':<string>, 'departNum': <int>, 'dormitoryNo': <string>}}
+- `/depart/add` POST {'data': {'departNo': '<string>', 'departName': '<string>', 'departOffice': '<string>', 'departNum': '<int>', 'dormitoryNo': '<string>'}}
 - `/depart/edit` POST 
-- `/depart/del` POST {'data': {'departNo' <string>}} **级连删除**
+- `/depart/del` POST {'data': {'departNo' '<string>'}} **级连删除**
 - `/depart/get/all` GET 返回值{'errCode':0, 'status':'OK', 'data': [...系基本信息列表]}
 - `/depart/get/<departNo>` GET 返回值{'errCode':0, 'status':'OK', 'data': [...系具体信息列表]}
 
 
 ### 学会管理
 
-- `/society/add` POST {'data': {'societyNo': <string>, 'societyName': <string>, 'societyYear':<int>, 'societyLoc': <string>}}
+- `/society/add` POST {'data': {'societyNo': '<string>', 'societyName': '<string>', 'societyYear':'<int>', 'societyLoc': '<string>'}}
 - `/society/edit` POST 
-- `/society/del` POST {'data': {'societyNo' <string>}} **级连删除**
+- `/society/del` POST {'data': {'societyNo' '<string>'}} **级连删除**
 - `/society/get/all` GET 返回值{'errCode':0, 'status':'OK', 'data': [...学会基本信息列表]}
 - `/society/get/<societyNo>` GET 返回值{'errCode':0, 'status':'OK', 'data': [...学会具体信息列表]}
 
 
 ### 宿舍区管理
 
-- `/dormitory/add` POST {'data': {'dormitoryNo': <string>, 'dormitoryName': <string>}}
+- `/dormitory/add` POST {'data': {'dormitoryNo': '<string>', 'dormitoryName': '<string>'}}
 - `/dormitory/edit` POST 
-- `/dormitory/del` POST {'data': {'dormitoryNo' <string>}} **级连删除**
+- `/dormitory/del` POST {'data': {'dormitoryNo' '<string>'}} **级连删除**
 - `/dormitory/get/all` GET 返回值{'errCode':0, 'status':'OK', 'data': [...宿舍区基本信息列表]}
 - `/dormitory/get/<dormitoryNo>` GET 返回值{'errCode':0, 'status':'OK', 'data': [...宿舍区具体信息列表]}
 
 ### 学生管理
 
-- `/student/add` POST {'data': {'stuNo': <string>, 'stuName': <string>, 'stuAge': <int>, 'departNo':<string>, 'classNo': <string>}}
+- `/student/add` POST {'data': {'stuNo': '<string>', 'stuName': '<string>', 'stuAge': '<int>', 'departNo': '<string>', 'classNo': '<string>'}}
 - `/student/edit` POST 
-- `/student/del` POST {'data': {'dormitoryNo' <string>}} **级连删除**
+- `/student/del` POST {'data': {'dormitoryNo' '<string>'}} **级连删除**
 - `/student/get/all` GET 返回值{'errCode':0, 'status':'OK', 'data': [...宿舍区基本信息列表]}
 - `/student/get/<dormitoryNo>` GET 返回值{'errCode':0, 'status':'OK', 'data': [...宿舍区具体信息列表]}
 
