@@ -37,3 +37,8 @@ CREATE TABLE Association(
   Ayear VARCHAR(5),
   Aaddr VARCHAR(40)
 );
+
+CREATE TABLE Dormitory(
+  dormitoryNo VARCHAR(10) PRIMARY KEY,
+  dormitoryName VARCHAR(20)
+);
