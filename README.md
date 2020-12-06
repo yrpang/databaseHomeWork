@@ -100,11 +100,11 @@ mysql -h cdb-n3duly12.bj.tencentcdb.com -u root -P 10065 -p
 
 ### 宿舍区管理(@yrpang)
 
-- `/dormitory/add` POST {'data': {'dormitoryNo': 'string', 'dormitoryName': 'string'}}
-- `/dormitory/edit` POST 
-- `/dormitory/del` POST {'data': {'dormitoryNo' 'string'}} **级连删除**
-- `/dormitory/get/all` GET 返回值{'errCode':0, 'status':'OK', 'data': [...宿舍区基本信息列表]}
-- `/dormitory/get/<dormitoryNo>` GET 返回值{'errCode':0, 'status':'OK', 'data': [...宿舍区具体信息列表]}
+- `/dormitory/<dormitoryNo>` PUT 修改 {'dormitoryNo': 'string', 'dormitoryName': 'string'}
+- `/dormitory/<dormitoryNo>` DELETE  **级连删除**
+- `/dormitory/<dormitoryNo>` GET 返回值{'errCode':0, 'status':'OK', 'data': [...宿舍区具体信息列表]}
+- `/dormitory` GET 返回所有宿舍信息 {'errCode':0, 'status':'OK', 'data': [...宿舍区基本信息列表]}
+- `/dormitory` 添加宿舍信息 POST {'data': {'dormitoryNo': 'string', 'dormitoryName': 'string'}}
 
 ### 学生管理
 
