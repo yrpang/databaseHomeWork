@@ -72,30 +72,30 @@ mysql -h cdb-n3duly12.bj.tencentcdb.com -u root -P 10065 -p
 
 ### 班级管理（陈禾嘉）
 
-- `/class/add` POST {'data': {'classNo': 'string', 'className': 'string', 'classYear':'int', 'departNo': 'int', 'classNum': 'int'}}
-- `/class/edit` POST 
-- `/class/del` POST {'data': {'classNo' 'string'}} **级连删除**
-- `/class/get/all` GET 返回值{'errCode':0, 'status':'OK', 'data': [...班级基本信息列表]}
-- `/class/get/<classNo>` GET 返回值{'errCode':0, 'status':'OK', 'data': [...班级具体信息列表]}
+- `/class/<classNo>` DELETE {'data': {'classNo' 'string'}} **级连删除**
+- `/class/<classNo>` PUT 
+- `/class/<classNo>` GET 返回值{'errCode':0, 'status':'OK', 'data': [...班级具体信息列表]}
+- `/class` GET 返回值{'errCode':0, 'status':'OK', 'data': [...班级基本信息列表]}
+- `/class` POST {'data': {'classNo': 'string', 'className': 'string', 'classYear':'int', 'departNo': 'int', 'classNum': 'int'}}
 
 
 
 ### 系管理
 
-- `/depart/add` POST {'data': {'departNo': 'string', 'departName': 'string', 'departOffice': 'string', 'departNum': 'int', 'dormitoryNo': 'string'}}
-- `/depart/edit` POST 
-- `/depart/del` POST {'data': {'departNo' 'string'}} **级连删除**
-- `/depart/get/all` GET 返回值{'errCode':0, 'status':'OK', 'data': [...系基本信息列表]}
-- `/depart/get/<departNo>` GET 返回值{'errCode':0, 'status':'OK', 'data': [...系具体信息列表]}
+- `/depart/<departNo>` PUT 
+- `/depart/<departNo>` DELETE {'data': {'departNo' 'string'}} **级连删除**
+- `/depart/<departNo>` GET 返回值{'errCode':0, 'status':'OK', 'data': [...系具体信息列表]}
+- `/depart` GET 返回值{'errCode':0, 'status':'OK', 'data': [...系基本信息列表]}
+- `/depart` POST {'data': {'departNo': 'string', 'departName': 'string', 'departOffice': 'string', 'departNum': 'int', 'dormitoryNo': 'string'}}
 
 
 ### 学会管理
 
-- `/society/add` POST {'data': {'societyNo': 'string', 'societyName': 'string', 'societyYear':'int', 'societyLoc': 'string'}}
-- `/society/edit` POST 
-- `/society/del` POST {'data': {'societyNo' 'string'}} **级连删除**
-- `/society/get/all` GET 返回值{'errCode':0, 'status':'OK', 'data': [...学会基本信息列表]}
-- `/society/get/<societyNo>` GET 返回值{'errCode':0, 'status':'OK', 'data': [...学会具体信息列表]}
+- `/society/<societyNo>` PUT
+- `/society/<societyNo>` DELETE **级连删除**
+- `/society/<societyNo>` GET 返回值{'errCode':0, 'status':'OK', 'data': [...学会具体信息列表]}
+- `/society` POST {'data': {'societyNo': 'string', 'societyName': 'string', 'societyYear':'int', 'societyLoc': 'string'}}
+- `/society` GET 返回值{'errCode':0, 'status':'OK', 'data': [...学会基本信息列表]}
 
 
 ### 宿舍区管理(@yrpang)
@@ -108,11 +108,11 @@ mysql -h cdb-n3duly12.bj.tencentcdb.com -u root -P 10065 -p
 
 ### 学生管理
 
-- `/student/add` POST {'data': {'stuNo': 'string', 'stuName': 'string', 'stuAge': 'int', 'departNo': 'string', 'classNo': 'string'}}
-- `/student/edit` POST 
-- `/student/del` POST {'data': {'dormitoryNo' 'string'}} **级连删除**
-- `/student/get/all` GET 返回值{'errCode':0, 'status':'OK', 'data': [...宿舍区基本信息列表]}
-- `/student/get/<dormitoryNo>` GET 返回值{'errCode':0, 'status':'OK', 'data': [...宿舍区具体信息列表]}
+- `/student/<dormitoryNo>` PUT 
+- `/student/<dormitoryNo>` DELETE {'data': {'dormitoryNo' 'string'}} **级连删除**
+- `/student/<dormitoryNo>` GET 返回值{'errCode':0, 'status':'OK', 'data': [...宿舍区具体信息列表]}
+- `/student` GET 返回值{'errCode':0, 'status':'OK', 'data': [...宿舍区基本信息列表]}
+- `/student` POST {'data': {'stuNo': 'string', 'stuName': 'string', 'stuAge': 'int', 'departNo': 'string', 'classNo': 'string'}}
 
 ## 5. 基本指南
 
