@@ -98,7 +98,7 @@ mysql -h cdb-n3duly12.bj.tencentcdb.com -u root -P 10065 -p
 - `/society/get/<societyNo>` GET 返回值{'errCode':0, 'status':'OK', 'data': [...学会具体信息列表]}
 
 
-### 宿舍区管理
+### 宿舍区管理(@yrpang)
 
 - `/dormitory/add` POST {'data': {'dormitoryNo': 'string', 'dormitoryName': 'string'}}
 - `/dormitory/edit` POST 
