@@ -70,13 +70,14 @@ mysql -h cdb-n3duly12.bj.tencentcdb.com -u root -P 10065 -p
 
 异常返回: {'errCode': -1, 'status':'具体错误信息'}
 
-### 班级管理
+### 班级管理（陈禾嘉）
 
 - `/class/add` POST {'data': {'classNo': 'string', 'className': 'string', 'classYear':'int', 'departNo': 'int', 'classNum': 'int'}}
 - `/class/edit` POST 
 - `/class/del` POST {'data': {'classNo' 'string'}} **级连删除**
 - `/class/get/all` GET 返回值{'errCode':0, 'status':'OK', 'data': [...班级基本信息列表]}
 - `/class/get/<classNo>` GET 返回值{'errCode':0, 'status':'OK', 'data': [...班级具体信息列表]}
+
 
 
 ### 系管理
