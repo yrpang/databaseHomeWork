@@ -62,6 +62,7 @@ mysql -h cdb-n3duly12.bj.tencentcdb.com -u root -P 10065 -p
 
 **API接口暂定如下，随着个人开发进度可以根据需要进行调整，请大家认领任务，把自己的名字写在后面，push到项目里，同时就当作熟悉git的使用了。**
 
+![ER图](ER.png)
 ### 总体返回值约定
 
 适用于下面的所有API，前端会判断如果`errCode`不为0会弹出说明给用户发生了什么错误。
@@ -70,7 +71,7 @@ mysql -h cdb-n3duly12.bj.tencentcdb.com -u root -P 10065 -p
 
 异常返回: {'errCode': -1, 'status':'具体错误信息'}
 
-### 班级管理（陈禾嘉）
+### 班级管理（陈禾嘉）**finished**
 
 - `/class/<classNo>` DELETE {'data': {'classNo' 'string'}} **级连删除**
 - `/class/<classNo>` PUT 
