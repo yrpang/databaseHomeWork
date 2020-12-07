@@ -71,7 +71,7 @@ mysql -h cdb-n3duly12.bj.tencentcdb.com -u root -P 10065 -p
 
 异常返回: {'errCode': -1, 'status':'具体错误信息'}
 
-### 班级管理（陈禾嘉）**finished**
+### 班级管理
 
 - `/class/<classNo>` DELETE {'data': {'classNo' 'string'}} **级连删除**
 - `/class/<classNo>` PUT 
@@ -107,13 +107,20 @@ mysql -h cdb-n3duly12.bj.tencentcdb.com -u root -P 10065 -p
 - `/dormitory` GET 返回所有宿舍信息 {'errCode':0, 'status':'OK', 'data': [...宿舍区基本信息列表]}
 - `/dormitory` 添加宿舍信息 POST {'data': {'dormitoryNo': 'string', 'dormitoryName': 'string'}}
 
-### 学生管理
+### 学生管理（陈禾嘉）**finished**
 
-- `/student/<dormitoryNo>` PUT 
-- `/student/<dormitoryNo>` DELETE {'data': {'dormitoryNo' 'string'}} **级连删除**
-- `/student/<dormitoryNo>` GET 返回值{'errCode':0, 'status':'OK', 'data': [...宿舍区具体信息列表]}
-- `/student` GET 返回值{'errCode':0, 'status':'OK', 'data': [...宿舍区基本信息列表]}
-- `/student` POST {'data': {'stuNo': 'string', 'stuName': 'string', 'stuAge': 'int', 'departNo': 'string', 'classNo': 'string'}}
+- `/student/<stuNo>` PUT 
+- `/student/<stuNo>` DELETE {'data': {'stuNo' 'string'}} **级连删除**
+- `/student/<stuNo>` GET 返回值{'errCode':0, 'status':'OK', 'data': [...学生具体信息列表]}
+- `/student` GET 返回值{'errCode':0, 'status':'OK', 'data': [...学生基本信息列表]}
+- `/student` POST {'data': {'stuNo': 'string', 
+'stuName': 'string', 
+'stuAge': 'int', 
+'departNo': 'string', 
+'classNo': 'string',
+'dormitoryNo': 'string', 
+'societyNo': 'string'}
+ }
 
 ## 5. 基本指南
 

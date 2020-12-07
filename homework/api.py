@@ -186,7 +186,6 @@ api.add_resource(department, '/department')
 api.add_resource(departmentItem, '/department/<string:departNo>')
 
 
-
 # 下面为student的api的实现(Hejia Chen)
 parser_studentItem = reqparse.RequestParser()
 parser_studentItem.add_argument('stuNo', required=True, type=str, help="stuNo not provide.")
@@ -195,6 +194,7 @@ parser_studentItem.add_argument('stuAge', required=True, type=int, help="stuAge 
 parser_studentItem.add_argument('departNo', required=True, type=str, help="departNo not provide.")
 parser_studentItem.add_argument('classNo', required=True, type=str, help="classNo not provide.")
 parser_studentItem.add_argument('dormitoryNo', required=True, type=str, help="dormitoryNo not provide.")
+parser_studentItem.add_argument('societyNo', required=True, type=str, help="societyNo not provide.")
 
 class studentItem(Resource):
     def checkIfExist(self, stuNo):  # 查询是否存在
@@ -231,12 +231,13 @@ class studentItem(Resource):
         self.checkIfExist(stuNo)
         try:
             cur.execute("UPDATE Student SET stuName='%s',"
-                        "stuAge = '%s',"
-                        "departNo = '%d',"
+                        "stuAge = '%d',"
+                        "departNo = '%s',"
                         "classNo = '%s', "
                         "dormitoryNo='%s'"
-                        "WHERE stuNo='%s';" % (
-                args['stuName'], args['stuAge'], args['departNo'], args['classNo'], args['dormitoryNo'], stuNo))
+                        "societyNo = '%s"
+                        "WHERE stuNo='%s';" % (args['stuName'], args['stuAge'], args['departNo'],
+                                               args['classNo'], args['dormitoryNo'], args['societyNo'], stuNo))
             db.commit()
         except Error:
             return {'errCode': -1, 'status': '执行错误'}
@@ -270,7 +271,8 @@ class student(Resource):
                          'stuAge': item[2],
                          'departNo': item[3],
                          'classNo':item[4],
-                         'dormitoryNo': item[5]}
+                         'dormitoryNo': item[5],
+                         'societyNo': item[6]}
                         for item in cur.fetchall()]}
         return res
 
@@ -280,10 +282,10 @@ class student(Resource):
         cur = get_db().cur
 
         try:
-            cur.execute("INSERT INTO Student(stuNo, stuName,stuAge,departNo, classNo, dormitoryNo) "
-                        "VALUES('%s', '%s', '%s', '%d','%s', '%s');" %
+            cur.execute("INSERT INTO Student(stuNo, stuName, stuAge, departNo, classNo, dormitoryNo, societyNo) "
+                        "VALUES('%s', '%s', '%d', '%s','%s', '%s', '%s');" %
                         (args['stuNo'], args['stuName'], args['stuAge'],
-                         args['departNo'], args['classNo'], args['dormitoryNo']))
+                         args['departNo'], args['classNo'], args['dormitoryNo'], args['societyNo']))
             db.commit()
         except Error:
             return {'errCode': -1, 'status': '执行错误'}
