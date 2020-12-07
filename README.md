@@ -80,7 +80,7 @@ mysql -h cdb-n3duly12.bj.tencentcdb.com -u root -P 10065 -p
 
 
 
-### 系管理
+### 系管理 (胡道汝) **finished**
 
 - `/depart/<departNo>` PUT 
 - `/depart/<departNo>` DELETE {'data': {'departNo' 'string'}} **级连删除**
