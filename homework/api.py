@@ -294,3 +294,104 @@ class student(Resource):
 
 api.add_resource(student, '/student')
 api.add_resource(departmentItem, '/student/<string:stuNo>')
+
+
+
+
+
+# 下面为association的api的实现 (tangkun)
+parser_associationItem = reqparse.RequestParser()
+parser_associationItem.add_argument('assNo', required=True,
+                                   type=str, help="assNo not provide.")
+parser_associationmentItem.add_argument('assName', required=True,
+                                   type=str, help="assName not provide.")
+parser_associationItem.add_argument('assYear', required=True,
+                                   type=int, help="Year not provide.")
+parser_associationItem.add_argument('assAdress', required=True,
+                                   type=str, help="assAdress not provide.")   # TO BE DELETE
+
+
+class associationItem(Resource):
+    def checkIfExist(self, assNo):  # 查询是否存在
+        cur = get_db().cur
+
+        cur.execute("SELECT * FROM Association WHERE assNo='%s'" % assNo)
+        if(len(cur.fetchall()) < 1):
+            abort(404, message={'errCode': -1, 'status': '操作的学会不存在'})
+
+    def get(self, assNo):
+        cur = get_db().cur
+
+        cur.execute("SELECT * FROM Association WHERE assNo='%s'" % assNo)
+        items = cur.fetchone()
+        print(items)
+        if not items:
+            return {'errCode': -1, 'status': '请求条目不存在'}
+        else:
+            return {'errCode': 0, 
+                    'status': 'OK',
+                    'data': {'assNo': items[0], 
+                            'assName': items[1], 
+                            'assYear': items[2],
+                            'assAdress': items[3]}
+                    }
+
+    def put(self, assNo):  # 增加
+        db = get_db()
+        cur = get_db().cur
+        args = parser_associationItem.parse_args()
+
+        self.checkIfExist(assNo)
+
+        try:
+            cur.execute("UPDATE Association SET assNo='%s',assName = '%s',assYear = '%d',assAdress = '%s' WHERE assNo='%s';" % (
+                args['assNo'], args['assName'], args['assYear'], args['assYear'], assNo))
+            db.commit()
+        except Error:
+            return {'errCode': -1, 'status': '执行错误'}
+        return {'errCode': 0, 'status': 'OK'}, 200
+
+    def delete(self, assNo):  # 删除
+        self.checkIfExist(assNo)
+        db = get_db()
+        cur = get_db().cur
+
+        try:
+            cur.execute(
+                "DELETE FROM Association WHERE assNo='%s';" % assNo)
+            db.commit()
+        except Error:
+            return {'errCode': -1, 'status': '执行错误'}
+        return {'errCode': 0, 'status': 'OK'}, 200
+
+
+parser_association = parser_associationItem.copy()
+parser_association.add_argument(
+    'assNo', required=True, type=str, help="assNo not provide.")
+
+
+class association(Resource):
+    def get(self):
+        cur = get_db().cur
+        cur.execute("SELECT * FROM Association;")
+
+        res = {'errCode': 0, 'status': 'OK', 'data': [
+            {'assNo': item[0], 'assName': item[1], 'assYear': item[2], 'assAdress': item[3]} for item in cur.fetchall()]}
+        return res
+
+    def post(self):
+        args = parser_association.parse_args()
+        db = get_db()
+        cur = get_db().cur
+
+        try:
+            cur.execute("INSERT INTO Association(assNo, assName,assYear,assAdress) VALUES('%s', '%s', '%d', '%s');" % (
+                args['assNo'], args['assName'], args['assYear'], args['assAdress']))
+            db.commit()
+        except Error:
+            return {'errCode': -1, 'status': '执行错误'}
+        return {'errCode': 0, 'status': 'OK'}, 200
+
+
+api.add_resource(association, '/association')
+api.add_resource(associationItem, '/association/<string:assNo>')
