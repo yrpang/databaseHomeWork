@@ -18,7 +18,6 @@ api.add_resource(associationItem, '/society/<string:societyNo>')
 api.add_resource(student, '/student')
 api.add_resource(studentItem, '/student/<string:stuNo>')
 
-
 api.add_resource(ClassAll, '/class')
 api.add_resource(classItem, '/class/<string:classNo>')
 

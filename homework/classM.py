@@ -10,7 +10,7 @@ parser_classItem.add_argument('className', required=True,
 parser_classItem.add_argument('classYear', required=True,
                               type=int, help="classYear not provide.")
 parser_classItem.add_argument('departNo', required=True,
-                              type=int, help="departNo not provide.")
+                              type=str, help="departNo not provide.")
 
 
 class classItem(Resource):
