@@ -24,7 +24,7 @@ class associationItem(Resource):
             abort(404, message={'errCode': -1, 'status': '操作的学会不存在'})
 
     def get(self, societyNo):
-        cur = get_db().cur
+        cur = get_db().cur 
 
         cur.execute("SELECT societyNo,societyName,societyYear,societyLoc FROM Association WHERE societyNo='%s'" %
                     societyNo)
