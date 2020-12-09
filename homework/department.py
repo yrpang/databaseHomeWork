@@ -84,7 +84,7 @@ class department(Resource):
         cur = get_db().cur
 
         try:
-            cur.execute("INSERT INTO Department(departName,departOffice,dormitoryNo) VALUES('%s', '%s', '%d','%s');" % (
+            cur.execute("INSERT INTO Department(departName,departOffice,dormitoryNo) VALUES('%s', '%s', '%s');" % (
                 args['departName'], args['departOffice'], args['dormitoryNo']))
             db.commit()
         except Error:
