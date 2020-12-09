@@ -37,11 +37,11 @@ class classItem(Resource):
         cur = get_db().cur
         args = parser_classItem.parse_args()
 
-        self.checkIfExist(classNo)
+        self.checkIfExist(str(classNo))
 
         try:
             cur.execute("UPDATE Class SET className='%s', classYear = %d, departNo = %d WHERE classNo='%s';" % (
-                args['className'], args['classYear'], args['departNo'], classNo))
+                args['className'], args['classYear'], args['departNo'], str(classNo)))
             db.commit()
         except Error:
             return {'errCode': -1, 'status': '执行错误'}
