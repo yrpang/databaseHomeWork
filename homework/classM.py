@@ -19,7 +19,7 @@ class classItem(Resource):
 
         cur.execute("SELECT * FROM Class WHERE classNo='%s'" % classNo)
         if(len(cur.fetchall()) < 1):
-            abort(404, "wrong!")
+            abort(404, {'errCode': -1, 'status': '不存在'})
 
     def get(self, classNo):
         cur = get_db().cur
