@@ -10,7 +10,7 @@ parser_classItem.add_argument('className', required=True,
 parser_classItem.add_argument('classYear', required=True,
                               type=int, help="classYear not provide.")
 parser_classItem.add_argument('departNo', required=True,
-                              type=str, help="departNo not provide.")
+                              type=int, help="departNo not provide.")
 
 
 class classItem(Resource):
@@ -54,7 +54,7 @@ class classItem(Resource):
 
         try:
             cur.execute(
-                "DELETE FROM _Class WHERE classNo='%s';" % classNo)
+                "DELETE FROM Class WHERE classNo='%s';" % classNo)
             db.commit()
         except Error:
             return {'errCode': -1, 'status': '执行错误'}
