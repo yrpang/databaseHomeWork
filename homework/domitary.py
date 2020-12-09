@@ -15,7 +15,9 @@ class dormitoryItem(Resource):
         cur.execute("SELECT * FROM Dormitory WHERE dormitoryNo='%s'" %
                     dormitoryNo)
         if(len(cur.fetchall()) < 1):
-            abort(404, message={'errCode': -1, 'status': '操作的宿舍不存在'})
+            return False
+        else:
+            return True
 
     def get(self, dormitoryNo):
         cur = get_db().cur
@@ -34,7 +36,8 @@ class dormitoryItem(Resource):
         cur = get_db().cur
         args = parser_dormitoryItem.parse_args()
 
-        self.checkIfExist(dormitoryNo)
+        if not self.checkIfExist(dormitoryNo):
+            return {'errCode': -1, 'status': '操作的系不存在'}
 
         try:
             cur.execute("UPDATE Dormitory SET dormitoryName='%s' WHERE dormitoryNo='%s';" % (
@@ -45,7 +48,8 @@ class dormitoryItem(Resource):
         return {'errCode': 0, 'status': 'OK'}, 200
 
     def delete(self, dormitoryNo):
-        self.checkIfExist(dormitoryNo)
+        if not self.checkIfExist(dormitoryNo):
+            return {'errCode': -1, 'status': '操作的系不存在'}
         db = get_db()
         cur = get_db().cur
 

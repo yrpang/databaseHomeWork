@@ -1,6 +1,6 @@
 from configparser import Error
 from flask import Blueprint, flash, g
-from flask_restful import Api, Resource, reqparse, abort, fields, marshal_with
+from flask_restful import Api, Resource, reqparse, fields, marshal_with
 from homework.db import get_db
 
 # 下面为department的api的实现
@@ -19,7 +19,9 @@ class departmentItem(Resource):
 
         cur.execute("SELECT * FROM Department WHERE departNo='%s'" % departNo)
         if(len(cur.fetchall()) < 1):
-            abort(404, message={'errCode': -1, 'status': '操作的系不存在'})
+            return False
+        else:
+            return True
 
     def get(self, departNo):
         cur = get_db().cur
@@ -37,7 +39,8 @@ class departmentItem(Resource):
         cur = get_db().cur
         args = parser_departmentItem.parse_args()
 
-        self.checkIfExist(departNo)
+        if not self.checkIfExist(departNo):
+            return {'errCode': -1, 'status': '操作的系不存在'}
 
         try:
             cur.execute("UPDATE Department SET departName='%s',departOffice = '%s',dormitoryNo = '%s' WHERE departNo='%s';" % (
@@ -48,7 +51,8 @@ class departmentItem(Resource):
         return {'errCode': 0, 'status': 'OK'}, 200
 
     def delete(self, departNo):  # 删除
-        self.checkIfExist(departNo)
+        if not self.checkIfExist(departNo):
+            return {'errCode': -1, 'status': '操作的系不存在'}
         db = get_db()
         cur = get_db().cur
 

@@ -21,7 +21,9 @@ class associationItem(Resource):
         cur.execute("SELECT * FROM Association WHERE societyNo='%s'" %
                     societyNo)
         if(len(cur.fetchall()) < 1):
-            abort(404, message={'errCode': -1, 'status': '操作的学会不存在'})
+            return False
+        else:
+            return True
 
     def get(self, societyNo):
         cur = get_db().cur 
@@ -45,7 +47,8 @@ class associationItem(Resource):
         cur = get_db().cur
         args = parser_associationItem.parse_args()
 
-        self.checkIfExist(societyNo)
+        if not self.checkIfExist(societyNo):
+            return {'errCode': -1, 'status': '操作的系不存在'}
 
         try:
             cur.execute("UPDATE Association SET societyNo='%s',societyName = '%s',societyYear = '%d',societyLoc = '%s' WHERE societyNo='%s';" % (
@@ -56,7 +59,8 @@ class associationItem(Resource):
         return {'errCode': 0, 'status': 'OK'}, 200
 
     def delete(self, societyNo):  # 删除
-        self.checkIfExist(societyNo)
+        if not self.checkIfExist(societyNo):
+            return {'errCode': -1, 'status': '操作的系不存在'}
         db = get_db()
         cur = get_db().cur
 

@@ -27,7 +27,9 @@ class studentItem(Resource):
 
         cur.execute("SELECT * FROM Student WHERE stuNo='%s'" % stuNo)
         if(len(cur.fetchall()) < 1):
-            abort(404, message={'errCode': -1, 'status': '操作的系不存在'})
+            return False
+        else:
+            return True
 
     def get(self, stuNo):
         cur = get_db().cur
@@ -53,7 +55,9 @@ class studentItem(Resource):
         cur = get_db().cur
         args = parser_studentItem.parse_args()
 
-        self.checkIfExist(stuNo)
+        if not self.checkIfExist(stuNo):
+            return {'errCode': -1, 'status': '操作的系不存在'}
+
         try:
             cur.execute("UPDATE Student SET stuName='%s',"
                         "stuAge = '%d',"
@@ -69,7 +73,8 @@ class studentItem(Resource):
         return {'errCode': 0, 'status': 'OK'}, 200
 
     def delete(self, stuNo):  # 删除
-        self.checkIfExist(stuNo)
+        if not self.checkIfExist(stuNo):
+            return {'errCode': -1, 'status': '操作的系不存在'}
         db = get_db()
         cur = get_db().cur
         try:
