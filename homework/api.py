@@ -1,4 +1,4 @@
-from .class import ClassAll, classItem
+from .classM import ClassAll, classItem
 from .society import association, associationItem
 from .student import student, studentItem
 # from .domitary import dormitory, dormitoryItem
