@@ -4,8 +4,6 @@ from homework.db import get_db
 
 # 下面为association的api的实现 (tangkun)
 parser_associationItem = reqparse.RequestParser()
-parser_associationItem.add_argument('societyNo', required=True,
-                                    type=str, help="societyNo not provide.")
 parser_associationItem.add_argument('societyName', required=True,
                                     type=str, help="societyName not provide.")
 parser_associationItem.add_argument('societyYear', required=True,
@@ -91,7 +89,7 @@ class association(Resource):
         cur = get_db().cur
 
         try:
-            cur.execute("INSERT INTO Association(societyNo, societyName,societyYear,societyLoc) VALUES('%s', '%d', '%s');" % (
+            cur.execute("INSERT INTO Association(societyName,societyYear,societyLoc) VALUES('%s', '%d', '%s');" % (
                 args['societyName'], args['societyYear'], args['societyLoc']))
             db.commit()
         except Error:
