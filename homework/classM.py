@@ -1,6 +1,7 @@
 from configparser import Error
 from flask import Blueprint, flash, g
 from flask_restful import Api, Resource, reqparse, fields, marshal_with, abort
+from mysql.connector import constants
 from homework.db import get_db
 
 # 下面为_Class的api的实现
@@ -37,11 +38,13 @@ class classItem(Resource):
         cur = get_db().cur
         args = parser_classItem.parse_args()
 
-        self.checkIfExist(str(classNo))
+        self.checkIfExist(classNo)
+
+        print(classNo)
 
         try:
             cur.execute("UPDATE Class SET className='%s', classYear = %d, departNo = %d WHERE classNo='%s';" % (
-                args['className'], args['classYear'], args['departNo'], str(classNo)))
+                args['className'], args['classYear'], args['departNo'], classNo))
             db.commit()
         except Error:
             return {'errCode': -1, 'status': '执行错误'}
