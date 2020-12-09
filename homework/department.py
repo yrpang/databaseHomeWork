@@ -9,8 +9,6 @@ parser_departmentItem.add_argument('departName', required=True,
                                    type=str, help="departName not provide.")
 parser_departmentItem.add_argument('departOffice', required=True,
                                    type=str, help="departOffice not provide.")
-parser_departmentItem.add_argument('departNum', required=True,
-                                   type=int, help="departNum not provide.")
 parser_departmentItem.add_argument('dormitoryNo', required=True,
                                    type=str, help="dormitoryNo not provide.")
 
@@ -42,8 +40,8 @@ class departmentItem(Resource):
         self.checkIfExist(departNo)
 
         try:
-            cur.execute("UPDATE Department SET departName='%s',departOffice = '%s',departNum = '%d',dormitoryNo = '%s' WHERE departNo='%s';" % (
-                args['departName'], args['departOffice'], args['departNum'], args['dormitoryNo'], departNo))
+            cur.execute("UPDATE Department SET departName='%s',departOffice = '%s',dormitoryNo = '%s' WHERE departNo='%s';" % (
+                args['departName'], args['departOffice'], args['dormitoryNo'], departNo))
             db.commit()
         except Error:
             return {'errCode': -1, 'status': '执行错误'}
@@ -82,8 +80,8 @@ class department(Resource):
         cur = get_db().cur
 
         try:
-            cur.execute("INSERT INTO Department(departName,departOffice,departNum,dormitoryNo) VALUES('%s', '%s', '%d','%s');" % (
-                args['departName'], args['departOffice'], args['departNum'], args['dormitoryNo']))
+            cur.execute("INSERT INTO Department(departName,departOffice,dormitoryNo) VALUES('%s', '%s', '%d','%s');" % (
+                args['departName'], args['departOffice'], args['dormitoryNo']))
             db.commit()
         except Error:
             return {'errCode': -1, 'status': '执行错误'}
