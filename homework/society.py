@@ -49,8 +49,8 @@ class associationItem(Resource):
             return {'errCode': -1, 'status': '操作的系不存在'}
 
         try:
-            cur.execute("UPDATE Association SET societyNo='%s',societyName = '%s',societyYear = '%d',societyLoc = '%s' WHERE societyNo='%s';" % (
-                args['societyNo'], args['societyName'], args['societyYear'], args['societyLoc'], societyNo))
+            cur.execute("UPDATE Association SET societyName = '%s',societyYear = '%d',societyLoc = '%s' WHERE societyNo='%s';" % (
+                args['societyName'], args['societyYear'], args['societyLoc'], societyNo))
             db.commit()
         except Error:
             return {'errCode': -1, 'status': '执行错误'}
