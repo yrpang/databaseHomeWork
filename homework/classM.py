@@ -8,7 +8,7 @@ parser_classItem = reqparse.RequestParser()
 parser_classItem.add_argument('className', required=True,
                               type=str, help="className not provide.")
 parser_classItem.add_argument('classYear', required=True,
-                              type=str, help="classYear not provide.")
+                              type=int, help="classYear not provide.")
 parser_classItem.add_argument('departNo', required=True,
                               type=int, help="departNo not provide.")
 
