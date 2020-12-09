@@ -1,6 +1,6 @@
 from configparser import Error
 from flask import Blueprint, flash, g
-from flask_restful import Api, Resource, reqparse, fields, marshal_with
+from flask_restful import Api, Resource, reqparse, fields, marshal_with, abort
 from homework.db import get_db
 
 # 下面为_Class的api的实现
@@ -19,9 +19,7 @@ class classItem(Resource):
 
         cur.execute("SELECT * FROM Class WHERE classNo='%s'" % classNo)
         if(len(cur.fetchall()) < 1):
-            return False
-        else:
-            return True
+            abort(404, "wrong!")
 
     def get(self, classNo):
         cur = get_db().cur
