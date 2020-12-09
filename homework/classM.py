@@ -40,7 +40,7 @@ class classItem(Resource):
         self.checkIfExist(classNo)
 
         try:
-            cur.execute("UPDATE Class SET className='%s', classYear = %d, departNo = %d, WHERE classNo='%s';" % (
+            cur.execute("UPDATE Class SET className='%s', classYear = %d, departNo = %d WHERE classNo='%s';" % (
                 args['className'], args['classYear'], args['departNo'], classNo))
             db.commit()
         except Error:
