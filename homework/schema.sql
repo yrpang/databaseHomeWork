@@ -17,7 +17,7 @@ CREATE TABLE Class(
   classNo VARCHAR(10) PRIMARY KEY,
   className VARCHAR(40) NOT NULL,
   classYear SMALLINT NOT NULL,
-  classNum INT,
+  classNum INT DEFAULT 0,
   departNo INT NOT NULL,
   FOREIGN KEY(departNo) REFERENCES Department(departNo)
 );
