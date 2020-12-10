@@ -17,8 +17,6 @@ parser_studentItem.add_argument(
     'classNo', required=True, type=str, help="classNo not provide.")
 parser_studentItem.add_argument(
     'dormitoryNo', required=True, type=str, help="dormitoryNo not provide.")
-parser_studentItem.add_argument(
-    'societyNo', required=True, type=str, help="societyNo not provide.")
 
 
 class studentItem(Resource):
@@ -47,7 +45,8 @@ class studentItem(Resource):
                              'stuAge': items[2],
                              'departNo': items[3],
                              'classNo': items[4],
-                             'dormitoryNo': items[5]}
+                             'dormitoryNo': items[5]
+                             }
                     }
 
     def put(self, stuNo):  # 增加
@@ -64,9 +63,8 @@ class studentItem(Resource):
                         "departNo = '%s',"
                         "classNo = '%s', "
                         "dormitoryNo='%s'"
-                        "societyNo = '%s"
                         "WHERE stuNo='%s';" % (args['stuName'], args['stuAge'], args['departNo'],
-                                               args['classNo'], args['dormitoryNo'], args['societyNo'], stuNo))
+                                               args['classNo'], args['dormitoryNo'], stuNo))
             db.commit()
         except Error:
             return {'errCode': -1, 'status': '执行错误'}
@@ -104,7 +102,7 @@ class student(Resource):
                          'departNo': item[3],
                          'classNo':item[4],
                          'dormitoryNo': item[5],
-                         'societyNo': item[6]}
+                         }
                         for item in cur.fetchall()]}
         return res
 
@@ -114,10 +112,10 @@ class student(Resource):
         cur = get_db().cur
 
         try:
-            cur.execute("INSERT INTO Student(stuNo, stuName, stuAge, departNo, classNo, dormitoryNo, societyNo) "
-                        "VALUES('%s', '%s', '%d', '%s','%s', '%s', '%s');" %
+            cur.execute("INSERT INTO Student(stuNo, stuName, stuAge, departNo, classNo, dormitoryNo) "
+                        "VALUES('%s', '%s', '%d', '%s','%s', '%s');" %
                         (args['stuNo'], args['stuName'], args['stuAge'],
-                         args['departNo'], args['classNo'], args['dormitoryNo'], args['societyNo']))
+                         args['departNo'], args['classNo'], args['dormitoryNo']))
             db.commit()
         except Error:
             return {'errCode': -1, 'status': '执行错误'}
