@@ -89,8 +89,6 @@ class student(Resource):
         cur = get_db().cur
         cur.execute("SELECT * FROM Student;")
 
-        print(cur.fetchone())
-
         res = {'errCode': 0,
                'status': 'OK',
                'data': [{'stuNo': item[0],
