@@ -34,6 +34,9 @@ class studentItem(Resource):
 
         cur.execute("SELECT * FROM Student WHERE stuNo='%s'" % stuNo)
         items = cur.fetchone()
+        # edit
+        society_list = list(cur.execute("SELECT * FROM JoinStatus WHERE stuNo='%s'" % stuNo))
+
         print(items)
         if not items:
             return {'errCode': -1, 'status': '请求条目不存在'}
@@ -45,7 +48,8 @@ class studentItem(Resource):
                              'stuAge': items[2],
                              'departNo': items[3],
                              'classNo': items[4],
-                             'dormitoryNo': items[5]
+                             'dormitoryNo': items[5],
+                             'societyNo': society_list
                              }
                     }
 
@@ -65,6 +69,10 @@ class studentItem(Resource):
                         "dormitoryNo='%s'"
                         "WHERE stuNo='%s';" % (args['stuName'], args['stuAge'], args['departNo'],
                                                args['classNo'], args['dormitoryNo'], stuNo))
+            db.commit()
+            # edit JoinStatus
+            for society in args['societyNo']:
+                cur.execute("INSERT INTO JoinStatus('stuNo, societyNo') VALUES(stuNo, '%s');" % society)
             db.commit()
         except Error:
             return {'errCode': -1, 'status': '执行错误'}
