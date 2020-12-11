@@ -10,13 +10,11 @@ parser_studentItem.add_argument(
 parser_studentItem.add_argument(
     'stuName', required=True, type=str, help="stuName not provide.")
 parser_studentItem.add_argument(
-    'stuAge', required=True, type=int, help="stuAge not provide.")
+    'stuAge', type=int, help="stuAge not provide.")
 parser_studentItem.add_argument(
     'departNo', required=True, type=str, help="departNo not provide.")
 parser_studentItem.add_argument(
     'classNo', required=True, type=str, help="classNo not provide.")
-parser_studentItem.add_argument(
-    'dormitoryNo', required=True, type=str, help="dormitoryNo not provide.")
 
 
 class studentItem(Resource):
@@ -46,10 +44,7 @@ class studentItem(Resource):
                     'data': {'stuNo': items[0],
                              'stuName': items[1],
                              'stuAge': items[2],
-                             'departNo': items[3],
-                             'classNo': items[4],
-                             'dormitoryNo': items[5],
-                             'societyNo': society_list
+                             'classNo': items[3]
                              }
                     }
 
@@ -107,9 +102,7 @@ class student(Resource):
                'data': [{'stuNo': item[0],
                          'stuName': item[1],
                          'stuAge': item[2],
-                         'departNo': item[3],
-                         'classNo':item[4],
-                         'dormitoryNo': item[5],
+                         'classNo':item[3]
                          }
                         for item in cur.fetchall()]}
         return res
