@@ -125,7 +125,7 @@ parser_soc.add_argument(
 class sockety_m(Resource):
     def put(self, stuNo):
         db = get_db()
-        db.autocommit = 0
+        db.autocommit = False
         cur = get_db().cur
 
         args = parser_soc.parse_args()
