@@ -48,7 +48,7 @@ class studentItem(Resource):
 
     def put(self, stuNo):
         db = get_db()
-        db.autocommit = False 
+        db.autocommit = False
         cur = get_db().cur
         args = parser_studentItem.parse_args()
 
@@ -121,7 +121,8 @@ class student(Resource):
 
 parser_soc = reqparse.RequestParser()
 parser_soc.add_argument(
-        'societyNo', required=True, type=list, location='json', help="societyNo not provide.")
+    'societyNo', required=True, type=list, location='json', help="societyNo not provide.")
+
 
 class sockety_m(Resource):
     def put(self, stuNo):
@@ -146,6 +147,9 @@ class sockety_m(Resource):
                     if int(society) not in args['societyNo']:
                         cur.execute(
                             "DELETE FROM JoinStatus WHERE stuNo=%s AND societyNo=%d;" % (stuNo, int(society)))
+            else:
+                cur.execute(
+                    "DELETE FROM JoinStatus WHERE stuNo=%s;" % (stuNo))
             db.commit()
         except Error:
             return {'errCode': -1, 'status': '执行错误'}
