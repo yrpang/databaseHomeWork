@@ -110,7 +110,7 @@ class student(Resource):
 
         try:
             cur.execute("INSERT INTO Student(stuNo, stuName, stuAge, classNo) "
-                        "VALUES('%s', '%s', %d, '%s');" %
+                        "VALUES('%s', '%s', %d, %d);" %
                         (args['stuNo'], args['stuName'], args['stuAge'], args['classNo']))
             db.commit()
         except Error:
