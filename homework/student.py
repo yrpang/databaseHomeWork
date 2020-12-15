@@ -11,7 +11,7 @@ parser_studentItem.add_argument(
 parser_studentItem.add_argument(
     'stuAge', type=int, help="stuAge not provide.")
 parser_studentItem.add_argument(
-    'classNo', required=True, type=int, help="classNo not provide.")
+    'classNo', required=True, type=str, help="classNo not provide.")
 
 
 class studentItem(Resource):
@@ -109,12 +109,13 @@ class student(Resource):
         cur = get_db().cur
 
         try:
+            print(args['classNo'])
             cur.execute("INSERT INTO Student(stuNo, stuName, stuAge, classNo) "
-                        "VALUES('%s', '%s', %d, %d);" %
+                        "VALUES('%s', '%s', %d, '%s');" %
                         (args['stuNo'], args['stuName'], args['stuAge'], args['classNo']))
             db.commit()
-        except Error:
-            return {'errCode': -1, 'status': '执行错误'}
+        except Error as e:
+            return {'errCode': -1, 'status': str(e)}
         return {'errCode': 0, 'status': 'OK'}, 200
 
 
