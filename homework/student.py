@@ -120,7 +120,7 @@ class student(Resource):
 
 parser_soc = reqparse.RequestParser()
 parser_soc.add_argument(
-    'societyNo', required=True, type=list, help="societyNo not provide.")
+    'societyNo', required=True, type=list, action='append', help="societyNo not provide.")
 
 class sockety_m(Resource):
     def put(self, stuNo):
