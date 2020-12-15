@@ -11,7 +11,7 @@ parser_studentItem.add_argument(
 parser_studentItem.add_argument(
     'stuAge', type=int, help="stuAge not provide.")
 parser_studentItem.add_argument(
-    'classNo', required=True, type=str, help="classNo not provide.")
+    'classNo', required=True, type=int, help="classNo not provide.")
 
 
 class studentItem(Resource):
@@ -48,7 +48,7 @@ class studentItem(Resource):
 
     def put(self, stuNo):
         db = get_db()
-        db.autocommit = 0
+        db.autocommit = False 
         cur = get_db().cur
         args = parser_studentItem.parse_args()
 
@@ -120,7 +120,7 @@ class student(Resource):
 
 parser_soc = reqparse.RequestParser()
 parser_soc.add_argument(
-    'societyNo', required=True, type=list, action='append', help="societyNo not provide.")
+        'societyNo', required=True, type=list, location='json', help="societyNo not provide.")
 
 class sockety_m(Resource):
     def put(self, stuNo):
@@ -142,7 +142,7 @@ class sockety_m(Resource):
                         cur.execute(
                             "INSERT INTO JoinStatus(stuNo, societyNo, joinYear) VALUES('%s',%d, '%s');" % (stuNo, int(society), datetime.datetime.now().year))
                 for society in society_now:
-                    if str(society) not in args['societyNo']:
+                    if int(society) not in args['societyNo']:
                         cur.execute(
                             "DELETE FROM JoinStatus WHERE stuNo=%s AND societyNo=%d;" % (stuNo, int(society)))
             db.commit()
