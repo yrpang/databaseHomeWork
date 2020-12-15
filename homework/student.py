@@ -31,7 +31,7 @@ class studentItem(Resource):
         items = cur.fetchone()
 
         cur.execute("SELECT * FROM JoinStatus WHERE stuNo='%s'" % stuNo)
-        society_list = [[x[1], x[2]] for x in cur.fetchall()]
+        society_list = [x[1] for x in cur.fetchall()]
 
         if not items:
             return {'errCode': -1, 'status': '请求条目不存在'}
