@@ -40,7 +40,7 @@ CREATE TABLE Association(
 CREATE TABLE JoinStatus(
   stuNo VARCHAR(11) NOT NULL,
   societyNo INT NOT NULL,
-  joinYear SMALLINT NOT NULL,
+  joinYear SMALLINT NOT NULL DEFAULT 2020,
   FOREIGN KEY(stuNo) REFERENCES Student(stuNo),
   FOREIGN KEY(societyNo) REFERENCES Association(societyNo)
 );

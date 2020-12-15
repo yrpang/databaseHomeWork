@@ -1,20 +1,19 @@
-from configparser import Error
+from logging import exception
 from flask_restful import Resource, reqparse, abort
 from homework.db import get_db
-
+import datetime
+from mysql.connector.errors import Error
 
 # 下面为student的api的实现(Hejia Chen)
 parser_studentItem = reqparse.RequestParser()
-parser_studentItem.add_argument(
-    'stuNo', required=True, type=str, help="stuNo not provide.")
 parser_studentItem.add_argument(
     'stuName', required=True, type=str, help="stuName not provide.")
 parser_studentItem.add_argument(
     'stuAge', type=int, help="stuAge not provide.")
 parser_studentItem.add_argument(
-    'departNo', required=True, type=str, help="departNo not provide.")
-parser_studentItem.add_argument(
     'classNo', required=True, type=str, help="classNo not provide.")
+parser_studentItem.add_argument(
+    'societyNo', required=True, type=list, help="classNo not provide.")
 
 
 class studentItem(Resource):
@@ -32,10 +31,10 @@ class studentItem(Resource):
 
         cur.execute("SELECT * FROM Student WHERE stuNo='%s'" % stuNo)
         items = cur.fetchone()
-        # edit
-        society_list = list(cur.execute("SELECT * FROM JoinStatus WHERE stuNo='%s'" % stuNo))
 
-        print(items)
+        cur.execute("SELECT * FROM JoinStatus WHERE stuNo='%s'" % stuNo)
+        society_list = [x[1] for x in cur.fetchall()]
+
         if not items:
             return {'errCode': -1, 'status': '请求条目不存在'}
         else:
@@ -44,41 +43,56 @@ class studentItem(Resource):
                     'data': {'stuNo': items[0],
                              'stuName': items[1],
                              'stuAge': items[2],
-                             'classNo': items[3]
+                             'classNo': items[3],
+                             'society': society_list
                              }
                     }
 
-    def put(self, stuNo):  # 增加
+    def put(self, stuNo):
         db = get_db()
+        db.autocommit = 0
         cur = get_db().cur
         args = parser_studentItem.parse_args()
 
         if not self.checkIfExist(stuNo):
-            return {'errCode': -1, 'status': '操作的系不存在'}
+            return {'errCode': -1, 'status': '操作的学生不存在'}
 
         try:
             cur.execute("UPDATE Student SET stuName='%s',"
-                        "stuAge = '%d',"
-                        "departNo = '%s',"
-                        "classNo = '%s', "
-                        "dormitoryNo='%s'"
-                        "WHERE stuNo='%s';" % (args['stuName'], args['stuAge'], args['departNo'],
-                                               args['classNo'], args['dormitoryNo'], stuNo))
-            db.commit()
+                        "stuAge = %d,"
+                        "classNo = '%s'"
+                        "WHERE stuNo='%s';" % (args['stuName'], args['stuAge'], args['classNo'], stuNo))
+
+            cur.execute("SELECT * FROM JoinStatus WHERE stuNo='%s'" % stuNo)
+            society_now = [x[1] for x in cur.fetchall()]
+
+            print(society_now)
+
             # edit JoinStatus
+            # ToDo: 不知道为什么单次出错不发生异常
             for society in args['societyNo']:
-                cur.execute("INSERT INTO JoinStatus('stuNo, societyNo') VALUES(stuNo, '%s');" % society)
+                if int(society) not in society_now:
+                    cur.execute(
+                        "INSERT INTO JoinStatus(stuNo, societyNo, joinYear) VALUES('%s',%d, '%s');" % (stuNo, int(society), datetime.datetime.now().year))
+            for society in society_now:
+                if str(society) not in args['societyNo']:
+                    cur.execute(
+                        "DELETE FROM JoinStatus WHERE stuNo=%s AND societyNo=%d;" % (stuNo, int(society)))
             db.commit()
         except Error:
+            db.rollback()
             return {'errCode': -1, 'status': '执行错误'}
+
         return {'errCode': 0, 'status': 'OK'}, 200
 
     def delete(self, stuNo):  # 删除
         if not self.checkIfExist(stuNo):
-            return {'errCode': -1, 'status': '操作的系不存在'}
+            return {'errCode': -1, 'status': '操作的学生不存在'}
         db = get_db()
         cur = get_db().cur
         try:
+            cur.execute(
+                "DELETE FROM JoinStatus WHERE stuNo='%s';" % stuNo)
             cur.execute(
                 "DELETE FROM Student WHERE stuNo='%s';" % stuNo)
             db.commit()
@@ -95,7 +109,7 @@ parser_student.add_argument('stuNo', required=True,
 class student(Resource):
     def get(self):
         cur = get_db().cur
-        cur.execute("SELECT * FROM Student;")
+        cur.execute("SELECT stuNo,stuName,stuAge,classNo FROM Student;")
 
         res = {'errCode': 0,
                'status': 'OK',
@@ -113,10 +127,9 @@ class student(Resource):
         cur = get_db().cur
 
         try:
-            cur.execute("INSERT INTO Student(stuNo, stuName, stuAge, departNo, classNo, dormitoryNo) "
-                        "VALUES('%s', '%s', '%d', '%s','%s', '%s');" %
-                        (args['stuNo'], args['stuName'], args['stuAge'],
-                         args['departNo'], args['classNo'], args['dormitoryNo']))
+            cur.execute("INSERT INTO Student(stuNo, stuName, stuAge, classNo) "
+                        "VALUES('%s', '%s', %d, '%s');" %
+                        (args['stuNo'], args['stuName'], args['stuAge'], args['classNo']))
             db.commit()
         except Error:
             return {'errCode': -1, 'status': '执行错误'}
