@@ -1,6 +1,6 @@
 from .classM import ClassAll, classItem
 from .society import association, associationItem
-from .student import student, studentItem
+from .student import student, studentItem, sockety_m
 # from .domitary import dormitory, dormitoryItem
 from .department import department, departmentItem
 from flask import Blueprint, flash, g
@@ -20,6 +20,8 @@ api.add_resource(studentItem, '/student/<string:stuNo>')
 
 api.add_resource(ClassAll, '/class')
 api.add_resource(classItem, '/class/<string:classNo>')
+
+api.add_resource(sockety_m, '/student/society/<string:stuNo>')
 
 # api.add_resource(dormitory, '/dormitory')
 # api.add_resource(dormitoryItem, '/dormitory/<string:dormitoryNo>')

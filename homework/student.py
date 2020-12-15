@@ -12,8 +12,6 @@ parser_studentItem.add_argument(
     'stuAge', type=int, help="stuAge not provide.")
 parser_studentItem.add_argument(
     'classNo', required=True, type=str, help="classNo not provide.")
-parser_studentItem.add_argument(
-    'societyNo', required=True, type=list, help="classNo not provide.")
 
 
 class studentItem(Resource):
@@ -62,22 +60,6 @@ class studentItem(Resource):
                         "stuAge = %d,"
                         "classNo = '%s'"
                         "WHERE stuNo='%s';" % (args['stuName'], args['stuAge'], args['classNo'], stuNo))
-
-            cur.execute("SELECT * FROM JoinStatus WHERE stuNo='%s'" % stuNo)
-            society_now = [x[1] for x in cur.fetchall()]
-
-            print(society_now)
-
-            # edit JoinStatus
-            # ToDo: 不知道为什么单次出错不发生异常
-            for society in args['societyNo']:
-                if int(society) not in society_now:
-                    cur.execute(
-                        "INSERT INTO JoinStatus(stuNo, societyNo, joinYear) VALUES('%s',%d, '%s');" % (stuNo, int(society), datetime.datetime.now().year))
-            for society in society_now:
-                if str(society) not in args['societyNo']:
-                    cur.execute(
-                        "DELETE FROM JoinStatus WHERE stuNo=%s AND societyNo=%d;" % (stuNo, int(society)))
             db.commit()
         except Error:
             db.rollback()
@@ -130,6 +112,39 @@ class student(Resource):
             cur.execute("INSERT INTO Student(stuNo, stuName, stuAge, classNo) "
                         "VALUES('%s', '%s', %d, '%s');" %
                         (args['stuNo'], args['stuName'], args['stuAge'], args['classNo']))
+            db.commit()
+        except Error:
+            return {'errCode': -1, 'status': '执行错误'}
+        return {'errCode': 0, 'status': 'OK'}, 200
+
+
+parser_soc = reqparse.RequestParser()
+parser_soc.add_argument(
+    'societyNo', required=True, type=list, help="societyNo not provide.")
+
+class sockety_m(Resource):
+    def put(self, stuNo):
+        db = get_db()
+        db.autocommit = 0
+        cur = get_db().cur
+
+        args = parser_soc.parse_args()
+
+        cur.execute("SELECT * FROM JoinStatus WHERE stuNo='%s'" % stuNo)
+        society_now = [x[1] for x in cur.fetchall()]
+        print(args['societyNo'])
+        try:
+            if args['societyNo']:
+                # edit JoinStatus
+                # ToDo: 不知道为什么单次出错不发生异常
+                for society in args['societyNo']:
+                    if int(society) not in society_now:
+                        cur.execute(
+                            "INSERT INTO JoinStatus(stuNo, societyNo, joinYear) VALUES('%s',%d, '%s');" % (stuNo, int(society), datetime.datetime.now().year))
+                for society in society_now:
+                    if str(society) not in args['societyNo']:
+                        cur.execute(
+                            "DELETE FROM JoinStatus WHERE stuNo=%s AND societyNo=%d;" % (stuNo, int(society)))
             db.commit()
         except Error:
             return {'errCode': -1, 'status': '执行错误'}
