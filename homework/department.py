@@ -1,4 +1,4 @@
-from configparser import Error
+from mysql.connector.errors import Error
 from flask import Blueprint, flash, g
 from flask_restful import Api, Resource, reqparse, fields, marshal_with
 from homework.db import get_db
@@ -46,8 +46,8 @@ class departmentItem(Resource):
             cur.execute("UPDATE Department SET departName='%s',departOffice = '%s',dormitoryNo = '%s' WHERE departNo='%s';" % (
                 args['departName'], args['departOffice'], args['dormitoryNo'], departNo))
             db.commit()
-        except Error:
-            return {'errCode': -1, 'status': '执行错误'}
+        except Error as e:
+            return {'errCode': -1, 'status': str(e)}
         return {'errCode': 0, 'status': 'OK'}, 200
 
     def delete(self, departNo):  # 删除
@@ -60,8 +60,8 @@ class departmentItem(Resource):
             cur.execute(
                 "DELETE FROM Department WHERE departNo='%s';" % departNo)
             db.commit()
-        except Error:
-            return {'errCode': -1, 'status': '执行错误'}
+        except Error as e:
+            return {'errCode': -1, 'status': str(e)}
         return {'errCode': 0, 'status': 'OK'}, 200
 
 
@@ -87,6 +87,6 @@ class department(Resource):
             cur.execute("INSERT INTO Department(departName,departOffice,dormitoryNo) VALUES('%s', '%s', '%s');" % (
                 args['departName'], args['departOffice'], args['dormitoryNo']))
             db.commit()
-        except Error:
-            return {'errCode': -1, 'status': '执行错误'}
+        except Error as e:
+            return {'errCode': -1, 'status': str(e)}
         return {'errCode': 0, 'status': 'OK'}, 200

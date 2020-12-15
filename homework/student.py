@@ -61,9 +61,9 @@ class studentItem(Resource):
                         "classNo = '%s'"
                         "WHERE stuNo='%s';" % (args['stuName'], args['stuAge'], args['classNo'], stuNo))
             db.commit()
-        except Error:
+        except Error as e:
             db.rollback()
-            return {'errCode': -1, 'status': '执行错误'}
+            return {'errCode': -1, 'status': str(e)}
 
         return {'errCode': 0, 'status': 'OK'}, 200
 
@@ -78,8 +78,8 @@ class studentItem(Resource):
             cur.execute(
                 "DELETE FROM Student WHERE stuNo='%s';" % stuNo)
             db.commit()
-        except Error:
-            return {'errCode': -1, 'status': '执行错误'}
+        except Error as e:
+            return {'errCode': -1, 'status': str(e)}
         return {'errCode': 0, 'status': 'OK'}, 200
 
 
@@ -134,7 +134,6 @@ class sockety_m(Resource):
 
         cur.execute("SELECT * FROM JoinStatus WHERE stuNo='%s'" % stuNo)
         society_now = [x[1] for x in cur.fetchall()]
-        print(args['societyNo'])
         try:
             if args['societyNo']:
                 # edit JoinStatus
@@ -151,6 +150,6 @@ class sockety_m(Resource):
                 cur.execute(
                     "DELETE FROM JoinStatus WHERE stuNo=%s;" % (stuNo))
             db.commit()
-        except Error:
-            return {'errCode': -1, 'status': '执行错误'}
+        except Error as e:
+            return {'errCode': -1, 'status': str(e)}
         return {'errCode': 0, 'status': 'OK'}, 200

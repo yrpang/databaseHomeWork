@@ -1,4 +1,4 @@
-from configparser import Error
+from mysql.connector.errors import Error
 from flask import Blueprint, flash, g
 from flask_restful import Api, Resource, reqparse, abort, fields, marshal_with
 from homework.db import get_db
@@ -43,8 +43,8 @@ class dormitoryItem(Resource):
             cur.execute("UPDATE Dormitory SET dormitoryName='%s' WHERE dormitoryNo='%s';" % (
                 args['dormitoryName'], dormitoryNo))
             db.commit()
-        except Error:
-            return {'errCode': -1, 'status': '执行错误'}
+        except Error as e:
+            return {'errCode': -1, 'status': str(e)}
         return {'errCode': 0, 'status': 'OK'}, 200
 
     def delete(self, dormitoryNo):
@@ -57,8 +57,8 @@ class dormitoryItem(Resource):
             cur.execute(
                 "DELETE FROM Dormitory WHERE dormitoryNo='%s';" % dormitoryNo)
             db.commit()
-        except Error:
-            return {'errCode': -1, 'status': '执行错误'}
+        except Error as e:
+            return {'errCode': -1, 'status': str(e)}
         return {'errCode': 0, 'status': 'OK'}, 200
 
 
@@ -84,6 +84,6 @@ class dormitory(Resource):
             cur.execute("INSERT INTO Dormitory(dormitoryNo, dormitoryName) VALUES('%s', '%s');" % (
                 args['dormitoryNo'], args['dormitoryName']))
             db.commit()
-        except Error:
-            return {'errCode': -1, 'status': '执行错误'}
+        except Error as e:
+            return {'errCode': -1, 'status': str(e)}
         return {'errCode': 0, 'status': 'OK'}, 200

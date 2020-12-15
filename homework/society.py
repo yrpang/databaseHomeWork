@@ -1,4 +1,4 @@
-from configparser import Error
+from mysql.connector.errors import Error
 from flask_restful import Resource, reqparse, abort
 from homework.db import get_db
 
@@ -52,8 +52,8 @@ class associationItem(Resource):
             cur.execute("UPDATE Association SET societyName = '%s',societyYear = '%d',societyLoc = '%s' WHERE societyNo='%s';" % (
                 args['societyName'], args['societyYear'], args['societyLoc'], societyNo))
             db.commit()
-        except Error:
-            return {'errCode': -1, 'status': '执行错误'}
+        except Error as e:
+            return {'errCode': -1, 'status': str(e)}
         return {'errCode': 0, 'status': 'OK'}, 200
 
     def delete(self, societyNo):  # 删除
@@ -66,8 +66,8 @@ class associationItem(Resource):
             cur.execute(
                 "DELETE FROM Association WHERE societyNo='%s';" % societyNo)
             db.commit()
-        except Error:
-            return {'errCode': -1, 'status': '执行错误'}
+        except Error as e:
+            return {'errCode': -1, 'status': str(e)}
         return {'errCode': 0, 'status': 'OK'}, 200
 
 
@@ -92,6 +92,6 @@ class association(Resource):
             cur.execute("INSERT INTO Association(societyName,societyYear,societyLoc) VALUES('%s', '%d', '%s');" % (
                 args['societyName'], args['societyYear'], args['societyLoc']))
             db.commit()
-        except Error:
-            return {'errCode': -1, 'status': '执行错误'}
+        except Error as e:
+            return {'errCode': -1, 'status': str(e)}
         return {'errCode': 0, 'status': 'OK'}, 200
