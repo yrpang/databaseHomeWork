@@ -50,3 +50,7 @@ CREATE TABLE Dormitory(
   dormitoryName VARCHAR(20)
 );
 
+CREATE VIEW NAME_SOCIETY
+  AS
+  SELECT societyName
+	FROM Association;
