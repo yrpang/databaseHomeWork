@@ -57,10 +57,11 @@ api.add_resource(change_classNo, '/manage/changeClassNo')
 class fixNumInfo(Resource):
     def get(self):
         db = get_db()
+        db.autocommit = True
         cur = get_db().cur
 
+        cur.execute('CALL FIXNUM')
         try:
-            cur.execute('CALL FIXNUM')
 
             cur.execute('SELECT * FROM tmp_table')
             data = [
@@ -69,7 +70,7 @@ class fixNumInfo(Resource):
             message = "校准了%d个错误: " % (len(data))
             for i in data:
                 message += "%s系原人数%d现人数%d;" % (i[1], i[2], i[3])
-            cur.execute('DROP TABLE IF EXISTS tmp_table')
+            #cur.execute('DROP TABLE IF EXISTS tmp_table')
             db.commit()
         except Error as e:
             return {'errCode': -1, 'status': str(e)}
