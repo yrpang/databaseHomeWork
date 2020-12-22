@@ -6,6 +6,7 @@ from .department import department, departmentItem
 from flask import Blueprint, flash, g
 from flask_restful import Api, reqparse, Resource
 from homework.db import get_db
+from mysql.connector.errors import Error
 
 api_bp = Blueprint('api', __name__, url_prefix='/api')
 api = Api(api_bp)
@@ -37,12 +38,13 @@ parser.add_argument('new_No', required=True,
 class change_classNo(Resource):
     def post(self):
         args = parser.parse_args()
-        db = get_db()
         cur = get_db().cur
-        print(args)
-        cur.execute('SELECT change_classNo(%s, %s)' %
-                    (args['old_No'], args['new_No']))
-        #db.commit()
+
+        try:
+            cur.execute('SELECT change_classNo(%s, %s)' %
+                        (args['old_No'], args['new_No']))
+        except Error as e:
+            return {'errCode': -1, 'status': str(e)}
         return {'errCode': 0, 'status': 'OK', 'data': cur.fetchone()}, 200
 
 
