@@ -115,4 +115,48 @@ BEGIN
   WHERE classNo=new_classNo;
 
   RETURN(num);
-END
+END;
+
+
+CREATE PROCEDURE FIXNUM()
+BEGIN
+  DECLARE done INT DEFAULT FALSE;
+  DECLARE id, num, real_num INT;
+  DECLARE tmp_name VARCHAR(20);
+  DECLARE cur CURSOR FOR SELECT departNo, departName, departNum FROM Department;
+  DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+
+  OPEN cur;
+
+  CREATE TEMPORARY TABLE tmp_table
+  (
+    departNo INT NOT NULL,
+    departName VARCHAR(20),
+    old_num INT NOT NULL,
+    new_num INT NOT NULL
+  );
+
+  deal_loop: LOOP
+    FETCH cur INTO id, tmp_name, num;
+
+    IF done THEN
+      LEAVE deal_loop;
+    END IF;
+
+    SELECT COUNT(*) INTO real_num
+    FROM Student, Class, Department
+    WHERE Student.classNo=Class.classNo AND Class.departNo=Department.departNo AND Department.departNo=id;
+
+    IF real_num!=num THEN
+      UPDATE Department
+      SET departNum=real_num
+      WHERE departNo=id;
+
+      INSERT INTO tmp_table
+      VALUES(id, tmp_name, num, real_num);
+    END IF;
+  END LOOP;
+
+  CLOSE cur;
+END;
+DELIMITER ;
