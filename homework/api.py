@@ -37,15 +37,18 @@ parser.add_argument('new_No', required=True,
 
 class change_classNo(Resource):
     def post(self):
+        db = get_db()
         args = parser.parse_args()
         cur = get_db().cur
 
         try:
             cur.execute('SELECT change_classNo(%s, %s)' %
                         (args['old_No'], args['new_No']))
+            data = cur.fetchone()
+            db.commit()
         except Error as e:
             return {'errCode': -1, 'status': str(e)}
-        return {'errCode': 0, 'status': 'OK', 'data': cur.fetchone()}, 200
+        return {'errCode': 0, 'status': 'OK', 'data': data}, 200
 
 
 api.add_resource(change_classNo, '/manage/changeClassNo')
