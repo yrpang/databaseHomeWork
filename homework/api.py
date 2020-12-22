@@ -4,7 +4,8 @@ from .student import student, studentItem, sockety_m
 # from .domitary import dormitory, dormitoryItem
 from .department import department, departmentItem
 from flask import Blueprint, flash, g
-from flask_restful import Api
+from flask_restful import Api, reqparse, Resource
+from homework.db import get_db
 
 api_bp = Blueprint('api', __name__, url_prefix='/api')
 api = Api(api_bp)
@@ -25,3 +26,22 @@ api.add_resource(sockety_m, '/student/society/<string:stuNo>')
 
 # api.add_resource(dormitory, '/dormitory')
 # api.add_resource(dormitoryItem, '/dormitory/<string:dormitoryNo>')
+
+parser = reqparse.RequestParser()
+parser.add_argument('old_No', required=True,
+                    type=str, help="old_No not provide!")
+parser.add_argument('new_No', required=True,
+                    type=str, help="new_No not provide!")
+
+
+class change_classNo(Resource):
+    def post(self):
+        args = parser.parse_args()
+        db = get_db()
+        cur = get_db().cur
+
+        cur.execute('change_classNo(%s, %s)' %
+                    (args['old_No'], args['new_No']))
+        db.commit()
+        return {'errCode': 0, 'status': 'OK', 'data': cur.fetchone()}, 200
+api.add_resource(change_classNo, '/manage/changeClassNo')
