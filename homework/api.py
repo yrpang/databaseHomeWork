@@ -58,11 +58,21 @@ class fixNumInfo(Resource):
     def get(self):
         db = get_db()
         cur = get_db().cur
-        cur.execute('CALL FIXNUM')
 
-        cur.execute('SELECT * FROM tmp_table')
-        data = [
-            {'departNo': item[0], 'departName': item[1], 'old_num': item[2], 'new_num': item[3]} for item in cur.fetchall()
-        ]
-        cur.execute('DROP TABLE IF EXISTS tmp_table')
-        return {'errCode': 0, 'status': 'OK', 'data': data}, 200
+        try:
+            cur.execute('CALL FIXNUM')
+
+            cur.execute('SELECT * FROM tmp_table')
+            data = [
+                {'departNo': item[0], 'departName': item[1], 'old_num': item[2], 'new_num': item[3]} for item in cur.fetchall()
+            ]
+            message = "校准了%d个错误: " % (len(data))
+            for i in data:
+                message += "%s系原人数%d现人数%d;" % (i[1], i[2], i[3])
+            cur.execute('DROP TABLE IF EXISTS tmp_table')
+            db.commit()
+        except Error as e:
+            return {'errCode': -1, 'status': str(e)}
+        return {'errCode': 0, 'status': 'OK', 'data': message}, 200
+
+api.add_resource(fixNumInfo, '/manage/fixNum')
