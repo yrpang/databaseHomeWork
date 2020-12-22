@@ -27,7 +27,7 @@ class studentItem(Resource):
     def get(self, stuNo):
         cur = get_db().cur
 
-        cur.execute("SELECT Student.stuNo,stuName,stuAge,Class.classNo,dormitoryNo FROM Student,Class,Department WHERE Student.classNo=Class.classNo AND Class.departNo=Department.departNo AND stuNo='%s'" % stuNo)
+        cur.execute("SELECT Student.stuNo,stuName,stuAge,Class.classNo,dormitoryNo,departName FROM Student,Class,Department WHERE Student.classNo=Class.classNo AND Class.departNo=Department.departNo AND stuNo='%s'" % stuNo)
         items = cur.fetchone()
         print(items)
 
@@ -44,7 +44,8 @@ class studentItem(Resource):
                              'stuAge': items[2],
                              'classNo': items[3],
                              'dormitory': items[4],
-                             'society': society_list
+                             'society': society_list,
+                             'departName': items[5]
                              }
                     }
 
