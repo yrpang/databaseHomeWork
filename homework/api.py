@@ -60,9 +60,8 @@ class fixNumInfo(Resource):
         db.autocommit = True
         cur = get_db().cur
 
-        cur.execute('CALL FIXNUM')
         try:
-
+            cur.execute('CALL FIXNUM')
             cur.execute('SELECT * FROM tmp_table')
             data = [
                 {'departNo': item[0], 'departName': item[1], 'old_num': item[2], 'new_num': item[3]} for item in cur.fetchall()
