@@ -63,9 +63,7 @@ class fixNumInfo(Resource):
         try:
             cur.execute('CALL FIXNUM')
             cur.execute('SELECT * FROM tmp_table')
-            data = [
-                {'departNo': item[0], 'departName': item[1], 'old_num': item[2], 'new_num': item[3]} for item in cur.fetchall()
-            ]
+            data = cur.fetchall()
             message = "校准了%d个错误: " % (len(data))
             for i in data:
                 message += "%s系原人数%d现人数%d;" % (i[1], i[2], i[3])
