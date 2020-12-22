@@ -4,6 +4,7 @@ DROP TABLE IF EXISTS Student;
 DROP TABLE IF EXISTS Class;
 DROP TABLE IF EXISTS Department;
 DROP TABLE IF EXISTS Dormitory;
+DROP VIEW IF EXISTS NAME_SOCIETY;
 
 CREATE TABLE Department(
   departNo INT PRIMARY KEY AUTO_INCREMENT,
@@ -50,11 +51,13 @@ CREATE TABLE Dormitory(
   dormitoryName VARCHAR(20)
 );
 
-CREATE VIEW NAME_SOCIETY
-AS
-SELECT societyName Name, COUNT(*) Num
-FROM Association
-GROUP BY societyName;
+CREATE VIEW NAME_SOCIETY AS
+(
+  SELECT societyName Name, COUNT(*) Num
+  FROM Association
+  GROUP BY societyName
+);
+
 
 DELIMITER $
 CREATE TRIGGER UPSTUNUM
@@ -65,7 +68,8 @@ BEGIN
   UPDATE Department SET departNum=departNum+1 WHERE departNo IN (
     SELECT departNo FROM Class, Student WHERE Class.classNo=NEW.classNo
   );
-END$
+END;
+$
 DELIMITER ;
 
 DELIMITER $
@@ -77,7 +81,8 @@ BEGIN
   UPDATE Department SET departNum=departNum-1 WHERE departNo IN (
     SELECT departNo FROM Class, Student WHERE Class.classNo=OLD.classNo
   );
-END$
+END;
+$
 DELIMITER ;
 
 DELIMITER $
@@ -93,10 +98,11 @@ BEGIN
   UPDATE Department SET departNum=departNum-1 WHERE departNo IN (
     SELECT departNo FROM Class, Student WHERE Class.classNo=OLD.classNo
   );
-END$
+END;
+$
 DELIMITER ;
 
-
+DELIMITER $
 CREATE FUNCTION change_classNo(old_classNo VARCHAR(20), new_classNo VARCHAR(20))
 RETURNS INT
 BEGIN
@@ -116,8 +122,11 @@ BEGIN
 
   RETURN(num);
 END;
+$
+DELIMITER ;
 
 
+DELIMITER $
 CREATE PROCEDURE FIXNUM()
 BEGIN
   DECLARE done INT DEFAULT FALSE;
@@ -159,4 +168,5 @@ BEGIN
 
   CLOSE cur;
 END;
+$
 DELIMITER ;
