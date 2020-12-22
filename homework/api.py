@@ -39,10 +39,10 @@ class change_classNo(Resource):
         args = parser.parse_args()
         db = get_db()
         cur = get_db().cur
-
+        print(args)
         cur.execute('SELECT change_classNo(%s, %s)' %
                     (args['old_No'], args['new_No']))
-        db.commit()
+        #db.commit()
         return {'errCode': 0, 'status': 'OK', 'data': cur.fetchone()}, 200
 
 
