@@ -44,4 +44,20 @@ class change_classNo(Resource):
                     (args['old_No'], args['new_No']))
         db.commit()
         return {'errCode': 0, 'status': 'OK', 'data': cur.fetchone()}, 200
+
+
 api.add_resource(change_classNo, '/manage/changeClassNo')
+
+
+class fixNumInfo(Resource):
+    def get(self):
+        db = get_db()
+        cur = get_db().cur
+        cur.execute('CALL FIXNUM')
+
+        cur.execute('SELECT * FROM tmp_table')
+        data = [
+            {'departNo': item[0], 'departName': item[1], 'old_num': item[2], 'new_num': item[3]} for item in cur.fetchall()
+        ]
+        cur.execute('DROP TABLE IF EXISTS tmp_table')
+        return {'errCode': 0, 'status': 'OK', 'data':data}, 200

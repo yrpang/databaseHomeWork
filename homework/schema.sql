@@ -137,6 +137,7 @@ BEGIN
 
   OPEN cur;
 
+  DROP TABLE IF EXISTS tmp_table;
   CREATE TEMPORARY TABLE tmp_table
   (
     departNo INT NOT NULL,
