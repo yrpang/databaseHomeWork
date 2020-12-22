@@ -40,7 +40,7 @@ class change_classNo(Resource):
         db = get_db()
         cur = get_db().cur
 
-        cur.execute('change_classNo(%s, %s)' %
+        cur.execute('SELECT change_classNo(%s, %s)' %
                     (args['old_No'], args['new_No']))
         db.commit()
         return {'errCode': 0, 'status': 'OK', 'data': cur.fetchone()}, 200
@@ -60,4 +60,4 @@ class fixNumInfo(Resource):
             {'departNo': item[0], 'departName': item[1], 'old_num': item[2], 'new_num': item[3]} for item in cur.fetchall()
         ]
         cur.execute('DROP TABLE IF EXISTS tmp_table')
-        return {'errCode': 0, 'status': 'OK', 'data':data}, 200
+        return {'errCode': 0, 'status': 'OK', 'data': data}, 200
