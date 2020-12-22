@@ -53,7 +53,7 @@ CREATE TABLE Dormitory(
 
 CREATE VIEW NAME_SOCIETY AS
 (
-  SELECT societyName Name, COUNT(*) Num
+  SELECT societyNo, societyName Name, COUNT(*) Num
   FROM Association
   GROUP BY societyName
 );

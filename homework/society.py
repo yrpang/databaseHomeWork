@@ -77,10 +77,10 @@ parser_association = parser_associationItem.copy()
 class association(Resource):
     def get(self):
         cur = get_db().cur
-        cur.execute("SELECT * FROM Association;")
+        cur.execute("SELECT * FROM NAME_SOCIETY;")
 
         res = {'errCode': 0, 'status': 'OK', 'data': [
-            {'societyNo': item[0], 'societyName': item[1], 'societyYear': item[2], 'societyLoc': item[3]} for item in cur.fetchall()]}
+            {'societyNo': item[0], 'societyName': item[1], 'societyNum': item[2]} for item in cur.fetchall()]}
         return res
 
     def post(self):
