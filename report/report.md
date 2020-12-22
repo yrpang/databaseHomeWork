@@ -20,20 +20,16 @@
 
 ## 2. 项目构建
 
-​	根据需求语义，我们构建的ER图如下：
+### 2.1 函数依赖分析
 
-![ER](..\ER.svg)
-
-​	由上图可知，班级与学生的关系是`1:n`，学会与学生的关系是 `m:n`，而系与班级的关系是 `1:n`。 由此，我们可以确定以下的关系：
+​	根据项目需求语义，我们可以确定以下的关系：
 
 - `Student`: `stuNo`, `stuName`, `stuAge`和`classNo`
 - `Society`: `societyNo`, `societyName`, `societyYear`和`societyLoc`
 - `Class`: `classNo`, `className`, `classYear`和`departNo`
 - `Department`: `departNo`, `departName`, `departOffice`和`dormitoryNo`
 
-### 2.1 函数依赖分析
-
-​	根据项目需求语义，可以得出以下FD：
+可以得出以下FD：
 $$
 \begin{align}
 Student: &stuNo \rightarrow stuName, 
@@ -52,6 +48,12 @@ Department:& departNo \rightarrow departName,
 \\& departNo \rightarrow dormitoryNo
 \end{align}
 $$
+
+根据分析，我们构建的ER图如下：
+
+![ER](..\ER.svg)
+
+​	其中，班级与学生的关系是`1:n`，学会与学生的关系是 `m:n`，而系与班级的关系是 `1:n`。 
 
 ### 2.2 系统实现
 
