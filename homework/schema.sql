@@ -51,11 +51,11 @@ CREATE TABLE Dormitory(
   dormitoryName VARCHAR(20)
 );
 
-CREATE VIEW NAME_SOCIETY AS
+CREATE OR REPLACE VIEW NAME_SOCIETY AS
 (
-  SELECT societyNo, societyName Name, COUNT(*) Num
-  FROM Association
-  GROUP BY societyName
+  SELECT Association.societyNo, Association.societyName Name, COUNT(DISTINCT Student.stuNo) Num
+  FROM Association LEFT OUTER JOIN JoinStatus ON(Association.societyNo=JoinStatus.societyNo) LEFT OUTER JOIN Student ON(JoinStatus.stuNo=Student.stuNo)
+  GROUP BY societyNo
 );
 
 
