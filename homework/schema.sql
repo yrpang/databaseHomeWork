@@ -43,7 +43,7 @@ CREATE TABLE JoinStatus(
   societyNo INT NOT NULL,
   joinYear SMALLINT NOT NULL DEFAULT 2020,
   FOREIGN KEY(stuNo) REFERENCES Student(stuNo),
-  FOREIGN KEY(societyNo) REFERENCES Association(societyNo)
+  FOREIGN KEY(societyNo) REFERENCES Association(societyNo) ON DELETE CASCADE
 );
 
 CREATE TABLE Dormitory(
