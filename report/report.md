@@ -58,7 +58,7 @@ $$
 ### 2.2 系统实现
 
 #### 2.2.1 建表
-实现于文件`schema.sql`
+##### 2.2.1.1 Department表
 ```
 CREATE TABLE Department(
   departNo INT PRIMARY KEY AUTO_INCREMENT,
@@ -68,7 +68,7 @@ CREATE TABLE Department(
   dormitoryNo VARCHAR(20)
 );
 ```
-一些介绍
+##### 2.2.1.2 Class表
 ~~~mysql
 CREATE TABLE Class(
   classNo VARCHAR(10) PRIMARY KEY,
@@ -79,7 +79,7 @@ CREATE TABLE Class(
   FOREIGN KEY(departNo) REFERENCES Department(departNo)
 );
 ~~~
-一些介绍
+##### 2.2.1.3 Student表
 ~~~mysql
 create TABLE Student(
   stuNo VARCHAR(11) PRIMARY KEY,
@@ -89,7 +89,7 @@ create TABLE Student(
   FOREIGN KEY(classNo) REFERENCES Class(classNo) ON UPDATE CASCADE
 );
 ~~~
-一些介绍
+##### 2.2.1.4 系表
 ~~~mysql
 CREATE TABLE Association(
   societyNo INT AUTO_INCREMENT PRIMARY KEY,
@@ -98,7 +98,7 @@ CREATE TABLE Association(
   societyLoc VARCHAR(50)
 );
 ~~~
-一些介绍
+##### 2.2.1.5 连接表
 ~~~mysql
 CREATE TABLE JoinStatus(
   stuNo VARCHAR(11) NOT NULL,
@@ -108,7 +108,7 @@ CREATE TABLE JoinStatus(
   FOREIGN KEY(societyNo) REFERENCES Association(societyNo)
 );
 ~~~
-一些介绍
+##### 2.2.1.6 Domitory表
 ~~~mysql
 CREATE TABLE Dormitory(
   dormitoryNo VARCHAR(10) PRIMARY KEY,
