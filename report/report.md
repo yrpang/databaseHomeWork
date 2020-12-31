@@ -89,7 +89,7 @@ create TABLE Student(
   FOREIGN KEY(classNo) REFERENCES Class(classNo) ON UPDATE CASCADE
 );
 ~~~
-##### 2.2.1.4 系表
+##### 2.2.1.4 Association表
 ~~~mysql
 CREATE TABLE Association(
   societyNo INT AUTO_INCREMENT PRIMARY KEY,
@@ -98,7 +98,7 @@ CREATE TABLE Association(
   societyLoc VARCHAR(50)
 );
 ~~~
-##### 2.2.1.5 连接表
+##### 2.2.1.5 JoinStatus表
 ~~~mysql
 CREATE TABLE JoinStatus(
   stuNo VARCHAR(11) NOT NULL,
@@ -115,7 +115,11 @@ CREATE TABLE Dormitory(
   dormitoryName VARCHAR(20)
 );
 ~~~
-一些介绍
+
+
+
+#### 2.2.2 建立学会视图
+##### 2.2.2.1 NAME_SOCIETY视图
 ~~~mysql
 CREATE OR REPLACE VIEW NAME_SOCIETY AS
 (
@@ -123,9 +127,10 @@ CREATE OR REPLACE VIEW NAME_SOCIETY AS
   FROM Association LEFT OUTER JOIN JoinStatus ON(Association.societyNo=JoinStatus.societyNo) LEFT OUTER JOIN Student ON(JoinStatus.stuNo=Student.stuNo)
   GROUP BY societyNo
 );
-
 ~~~
-一些介绍
+
+#### 2.2.3 触发器实现
+##### 2.2.3.1 增加学生数量触发器
 ~~~mysql
 DELIMITER $
 CREATE TRIGGER UPSTUNUM
@@ -139,7 +144,9 @@ BEGIN
 END;
 $
 DELIMITER ;
-
+~~~
+##### 2.2.3.2 减少学生数量触发器
+~~~mysql
 DELIMITER $
 CREATE TRIGGER DECSTUNUM
 AFTER DELETE ON Student
@@ -152,7 +159,9 @@ BEGIN
 END;
 $
 DELIMITER ;
-
+~~~
+##### 2.2.3.3 更新学生数量触发器
+~~~mysql
 DELIMITER $
 CREATE TRIGGER UPDATESTUNUM
 AFTER UPDATE ON Student
@@ -169,7 +178,10 @@ BEGIN
 END;
 $
 DELIMITER ;
+~~~
 
+#### 2.2.3 建立函数
+~~~mysql
 DELIMITER $
 CREATE FUNCTION change_classNo(old_classNo VARCHAR(20), new_classNo VARCHAR(20))
 RETURNS INT
@@ -192,9 +204,10 @@ BEGIN
 END;
 $
 DELIMITER ;
+~~~
 
-
-
+#### 2.2.4 建立存储过程
+~~~mysql
 DELIMITER $
 CREATE PROCEDURE FIXNUM()
 BEGIN
@@ -242,37 +255,6 @@ $
 DELIMITER ;
 ~~~
 
-#### 2.2.2 建立学会视图
-
-~~~mysql
-create view ...
-~~~
-
-#### 2.2.3 触发器实现
-
-~~~mysql
--- 在此处插入触发器的代码
-~~~
-
-
-
-还有一些我没有想到的功能就都放在这里。
-
-```
-
-```
-
-jjkljkl
-
-* jklj
-* 客户客户开具、
-
-
-- 看
-- 解开了解开了
-
-
-ljkhnjk
 
 
 ### 2.3 前端-后端接口
