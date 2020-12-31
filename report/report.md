@@ -59,7 +59,7 @@ $$
 
 #### 2.2.1 建表
 实现于文件`schema.sql`
-~~~mysql
+```
 CREATE TABLE Department(
   departNo INT PRIMARY KEY AUTO_INCREMENT,
   departName VARCHAR(20) NOT NULL,
@@ -67,7 +67,7 @@ CREATE TABLE Department(
   departNum INT DEFAULT 0,
   dormitoryNo VARCHAR(20)
 );
-~~~
+```
 一些介绍
 ~~~mysql
 CREATE TABLE Class(
