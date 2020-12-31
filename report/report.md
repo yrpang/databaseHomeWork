@@ -119,7 +119,7 @@ CREATE TABLE Dormitory(
 
 
 #### 2.2.2 建立学会视图
-##### 2.2.2.1 NAME_SOCIETY视图
+此视图展示学会的学会名以及学生数量
 ~~~mysql
 CREATE OR REPLACE VIEW NAME_SOCIETY AS
 (
@@ -130,6 +130,7 @@ CREATE OR REPLACE VIEW NAME_SOCIETY AS
 ~~~
 
 #### 2.2.3 触发器实现
+根据每个班的学生变动情况自动增减班级表和系表的人数字段的值，以完成要求的后端设计要求。
 ##### 2.2.3.1 增加学生数量触发器
 ~~~mysql
 DELIMITER $
@@ -181,6 +182,7 @@ DELIMITER ;
 ~~~
 
 #### 2.2.3 建立函数
+给定一个班的旧班号和新班号，把所有相关表中此班的旧班号改为新班号，并返回此班的人数，以完成后端设计要求。
 ~~~mysql
 DELIMITER $
 CREATE FUNCTION change_classNo(old_classNo VARCHAR(20), new_classNo VARCHAR(20))
@@ -207,6 +209,7 @@ DELIMITER ;
 ~~~
 
 #### 2.2.4 建立存储过程
+使用游标完成如下功能：确定系表中人数字段的值与实际学生数是否相符。如果不相符，把人数字段的值改为实际数，并返回此系的系号、系名、原人数、实际人数。
 ~~~mysql
 DELIMITER $
 CREATE PROCEDURE FIXNUM()
