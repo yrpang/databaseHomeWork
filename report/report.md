@@ -42,10 +42,11 @@
 根据[1-任务要求](#1-任务要求)中的需求进行分析，得出系统中共包含四个实体，分别为：学生、班级、学会和系，根据实体间关系构建的ER图并进行优化，最终结果如下(图2)：
 
 <center>
- <img style="padding:10px; background-color:#fff; height:400px" src="ER.svg">
+ <img style="padding:10px; background-color:#fff; height:300px" src="ER.svg">
  <br>
  <div style="display: inline-block; color: #000; padding: 2px;">图2</div>
 </center>
+
 
 
 
@@ -420,12 +421,12 @@ mysql> describe Student;
 <center>
   <div >
     <div style="display:inline-block;">
-      <img style="background-color:#fff; height:400px;" src="img1.png">
+      <img style="background-color:#fff; height:350px;" src="img1.png">
   		<br>
   		<div style="display: inline-block; color: #000; padding: 2px;">图3</div> 
     </div>
     <div style=" display:inline-block;">
-      <img style="background-color:#fff; height:400px;" src="img2.png">
+      <img style="background-color:#fff; height:350px;" src="img2.png">
     	<br>
     	<div style="display: inline-block; color: #000; padding: 2px;">图4</div>
     </div>
@@ -434,17 +435,18 @@ mysql> describe Student;
 <center>
   <div >
     <div style="display:inline-block;">
-      <img style="background-color:#fff; height:400px;" src="img3.png">
+      <img style="background-color:#fff; height:350px;" src="img3.png">
   		<br>
   		<div style="display: inline-block; color: #000; padding: 2px;">图5</div> 
     </div>
     <div style=" display:inline-block;">
-      <img style="background-color:#fff; height:400px;" src="img4.png">
+      <img style="background-color:#fff; height:350px;" src="img4.png">
     	<br>
     	<div style="display: inline-block; color: #000; padding: 2px;">图6</div>
     </div>
   </div>
 </center>
+
 
 
 
