@@ -415,9 +415,27 @@ mysql> describe Student;
 用户界面如下(图3、4、5、6)
 
 <center>
-  <img style="background-color:#fff;" src=".png">
+  <img style="background-color:#fff; height:400px;" src="img1.png">
   <br>
   <div style="display: inline-block; color: #000; padding: 2px;">图3</div>
+</center>
+
+<center>
+  <img style="background-color:#fff; height:400px;" src="img2.png">
+  <br>
+  <div style="display: inline-block; color: #000; padding: 2px;">图4</div>
+</center>
+
+<center>
+  <img style="background-color:#fff; height:400px;" src="img3.png">
+  <br>
+  <div style="display: inline-block; color: #000; padding: 2px;">图5</div>
+</center>
+
+<center>
+  <img style="background-color:#fff; height:400px;" src="img4.png">
+  <br>
+  <div style="display: inline-block; color: #000; padding: 2px;">图6</div>
 </center>
 
 ## 7 小组分工情况
@@ -427,13 +445,14 @@ mysql> describe Student;
 胡道汝(@hai-bo1017)负责文档撰写部分组织协调及**后端系管理**实现
 唐坤(@lyxybrtejw)负责**后端学会管理**实现
 
-另附GitHub commit记录如下(图4):
+另附GitHub commit记录如下(图7):
 
 <center>
   <img style="background-color:#fff; width:80%; height:80%;" src="commits.png">
   <br>
-  <div style="display: inline-block; color: #000; padding: 2px;">图4</div>
+  <div style="display: inline-block; color: #000; padding: 2px;">图7</div>
 </center>
+
 
 
 ## 8 小组工作总结
