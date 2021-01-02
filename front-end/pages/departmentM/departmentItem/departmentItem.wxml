@@ -1,0 +1,24 @@
+<mp-toptips msg="{{error}}" type="error" show="{{error}}"></mp-toptips>
+
+<view class="center-box">
+  <title class="title">详细信息</title>
+</view>
+
+
+<mp-cells>
+  <mp-cell title="系名称" ext-class="">
+    <input bindinput="nameInput" class="weui-input" value="{{data.departName}}" />
+  </mp-cell>
+  <mp-cell title="宿舍区" ext-class="">
+    <input bindinput="locInput" class="weui-input" value="{{data.dormitoryNo}}" />
+  </mp-cell>
+  <mp-cell title="办公室" ext-class="">
+    <input bindinput="officeInput" class="weui-input" value="{{data.departOffice}}" />
+  </mp-cell>
+  <mp-cell title="系人数" ext-class="">
+    <input class="weui-input" value="{{data.departNum}}" disabled="true" />
+  </mp-cell>
+</mp-cells>
+
+<button bindtap="create" type="primary" style="margin-top:40rpx;" wx:if="{{ifnew}}">创建</button>
+<button bindtap="submit" type="primary" style="margin-top:40rpx;" wx:else>提交修改</button>

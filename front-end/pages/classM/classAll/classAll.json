@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "mp-cells": "weui-miniprogram/cells/cells",
+    "mp-cell": "weui-miniprogram/cell/cell",
+    "mp-slideview": "weui-miniprogram/slideview/slideview",
+    "wux-fab-button": "../../../miniprogram_npm/wux-weapp/fab-button/index"
+  },
+  "enablePullDownRefresh": true
+}

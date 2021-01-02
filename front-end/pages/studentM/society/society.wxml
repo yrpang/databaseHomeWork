@@ -1,0 +1,22 @@
+<!--pages/studentM/society/society.wxml-->
+<wxs module="m2">
+	var checkSelect = function (id, select_id) {
+		if (select_id.indexOf(id) != -1) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	module.exports.checkSelect = checkSelect;
+</wxs>
+
+<checkbox-group bindchange="onChange">
+	<label class="weui-cell weui-check__label" wx:for="{{society}}" wx:key="societyNo">
+		<view class="weui-cell__hd">
+			<checkbox value="{{item.societyNo}}" checked="{{m2.checkSelect(item.societyNo, checked)}}" />
+		</view>
+		<view class="weui-cell__bd">{{item.societyName}}</view>
+	</label>
+</checkbox-group>
+
+<button type="primary" bindtap="submit">提交</button>

@@ -1,0 +1,21 @@
+<mp-toptips msg="{{error}}" type="error" show="{{error}}"></mp-toptips>
+
+<view class="center-box">
+  <title class="title">详细信息</title>
+</view>
+
+
+<mp-cells>
+  <mp-cell title="名称" ext-class="">
+    <input bindinput="nameInput" class="weui-input" value="{{data.societyName}}" />
+  </mp-cell>
+  <mp-cell title="年份" ext-class="">
+    <input bindinput="yearInput" class="weui-input" value="{{data.societyYear}}" />
+  </mp-cell>
+  <mp-cell title="地点" ext-class="">
+    <input bindinput="locInput" class="weui-input" value="{{data.societyLoc}}" />
+  </mp-cell>
+</mp-cells>
+
+<button bindtap="create" type="primary" style="margin-top:40rpx;" wx:if="{{ifnew}}">创建</button>
+<button bindtap="submit" type="primary" style="margin-top:40rpx;" wx:else>提交修改</button>

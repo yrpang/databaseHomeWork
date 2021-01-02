@@ -1,0 +1,9 @@
+<!--index.wxml-->
+<view class="container">
+  <button type="primary" bindtap="toClassM">班级管理</button>
+  <button type="primary" bindtap="tosocietyM">学会管理</button>
+  <button type="primary" bindtap="toDepartmentM">系管理</button>
+  <button type="primary" bindtap="tostudentM">学生管理</button>
+  <button bindtap="toClassChange" style="background-color: red; color: #fff;">班级修改</button>
+  <button bindtap="fixNum" style="background-color: red; color: #fff;">人数校准</button>
+</view>

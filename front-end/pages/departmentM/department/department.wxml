@@ -1,0 +1,15 @@
+<!--pages/departmentM/departmentM.wxml-->
+<view>
+  <view class="center-box">
+    <title class="title">系列表</title>
+    <text wx:if="{{data.length==0}}" style="margin-top:20px;">还没有呢...</text>
+  </view>
+
+  <mp-cells ext-class="my-cells" wx:for="{{data}}" wx:key="departNo">
+    <mp-slideview buttons="{{slideButtons}}" bindbuttontap="delete" id="{{item.departNo}}" bindtap="toItem">
+      <mp-cell link value="{{item.departName}}" footer="{{item.departNum}}人"></mp-cell>
+    </mp-slideview>
+  </mp-cells>
+
+  <wux-fab-button position="bottomRight" buttons="{{ buttons }}" bind:click="add"/>
+</view>

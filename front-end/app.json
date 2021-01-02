@@ -1,0 +1,26 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/classM/classAll/classAll",
+    "pages/classM/classItem/classItem",
+    "pages/departmentM/department/department",
+    "pages/departmentM/departmentItem/departmentItem",
+    "pages/societyM/societyItem/societyItem",
+    "pages/societyM/society/society",
+    "pages/studentM/studentAll/studentAll",
+    "pages/studentM/studentItem/studentItem",
+    "pages/studentM/society/society",
+    "pages/changeClassNo/changeClassNo"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "Weixin",
+    "navigationBarTextStyle": "black"
+  },
+  "style": "v2",
+  "useExtendedLib": {
+    "weui": true
+  },
+  "sitemapLocation": "sitemap.json"
+}

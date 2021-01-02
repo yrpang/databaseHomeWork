@@ -1,0 +1,6 @@
+/* pages/departmentM/departmentItem/departmentItem.wxss */
+
+.weui-input{
+  margin-left: 20px;
+  width: 500rpx;
+}
