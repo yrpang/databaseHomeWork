@@ -23,11 +23,10 @@
 系统整体定位为一个web项目，整体架构如下图1所示。
 
 <center>
-  <img style="background-color:#fff; height:300px;" src="structure.svg">
+  <img style="padding:10px; background-color:#fff; height:300px;" src="structure.svg">
   <br>
   <div style="display: inline-block; color: #000; padding: 2px;">图1</div>
 </center>
-
 
 系统前端采用微信小程序，后端使用 `flask` 框架，数据库选用 `MySQL5.7` 。
 
@@ -46,9 +45,6 @@
  <br>
  <div style="display: inline-block; color: #000; padding: 2px;">图2</div>
 </center>
-
-
-
 
 如上图2所示，班级与学生、系与班级的关系为 `1:n`（一对多），学会与学生的关系是多对多关系 `m:n`（多对多）。
 
@@ -73,7 +69,7 @@ $$
 &Student: \{stuNo \rightarrow stuName,\ stuNo \rightarrow stuAge,
 stuNo \rightarrow classNo\}\\
 
-\\&Society: \{societyNo \rightarrow societyName,\ societyNo \rightarrow societyYear,\ 
+\\&Society: \{societyNo \rightarrow societyName,\ societyNo \rightarrow societyYear,\
 societyNo \rightarrow societyLoc\}\\
 
 \\&Class: \{classNo \rightarrow className,\ classNo \rightarrow departNo,\ 
@@ -422,13 +418,13 @@ mysql> describe Student;
   <div >
     <div style="display:inline-block;">
       <img style="background-color:#fff; height:350px;" src="img1.png">
-  		<br>
-  		<div style="display: inline-block; color: #000; padding: 2px;">图3</div> 
+      <br>
+      <div style="display: inline-block; color: #000; padding: 2px;">图3</div>
     </div>
     <div style=" display:inline-block;">
       <img style="background-color:#fff; height:350px;" src="img2.png">
-    	<br>
-    	<div style="display: inline-block; color: #000; padding: 2px;">图4</div>
+      <br>
+      <div style="display: inline-block; color: #000; padding: 2px;">图4</div>
     </div>
   </div>
 </center>
@@ -447,15 +443,12 @@ mysql> describe Student;
   </div>
 </center>
 
-
-
-
 ## 7 小组分工情况
 
-* 庞义人(@yrpang)负责项目整体组织协调、**前端微信小程序**、**后端班级管理**实现
-* 陈禾嘉(@HarryXD2018)负责**数据库设计及E-R图绘制**和**后端学生管理**实现
-* 胡道汝(@hai-bo1017)负责**文档撰写**组织协调及**后端系管理**实现
-* 唐坤(@lyxybrtejw)负责**后端学会管理**实现
+- 庞义人(@yrpang)负责项目整体组织协调、**前端微信小程序**、**后端班级管理**实现
+- 陈禾嘉(@HarryXD2018)负责**数据库设计及E-R图绘制**和**后端学生管理**实现
+- 胡道汝(@hai-bo1017)负责**文档撰写**组织协调及**后端系管理**实现
+- 唐坤(@lyxybrtejw)负责**后端学会管理**实现
 
 另附GitHub commit记录如下(图7):
 
@@ -464,7 +457,6 @@ mysql> describe Student;
   <br>
   <div style="display: inline-block; color: #000; padding: 2px;">图7</div>
 </center>
-
 
 ## 8 小组工作总结
 
