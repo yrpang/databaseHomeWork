@@ -23,7 +23,7 @@
 系统整体定位为一个web项目，整体架构如下图1所示。
 
 <center>
-  <img style="background-color:#fff; height:300px;" src="main.png">
+  <img style="background-color:#fff; height:300px;" src="structure.svg">
   <br>
   <div style="display: inline-block; color: #000; padding: 2px;">图1</div>
 </center>
