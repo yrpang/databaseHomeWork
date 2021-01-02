@@ -23,9 +23,9 @@
 系统整体定位为一个web项目，整体架构如下图1所示，前端采用微信小程序，后端使用 `flask` 框架，数据库选用 `MySQL5.7` ，为方便本地练习及线上系统使用，数据库使用腾讯云的云MySQL。
 
 <center>
- <img style="padding:10px; background-color:#fff; " src="..\ER.svg">
- <br>
- <div style="display: inline-block; color: #000; padding: 2px;">图1</div> 
+  <img style="padding:10px; background-color:#fff; " src="..\ER.svg">
+  <br>
+  <div style="display: inline-block; color: #000; padding: 2px;">图1</div>
 </center>
 
 ## 2. 数据库设计
@@ -42,11 +42,11 @@
 可以得出以下FD：
 $$
 \begin{align}
-Student: &stuNo \rightarrow stuName, 
+Student: &stuNo \rightarrow stuName,
 \\&stuNo \rightarrow stuAge,
 \\&stuNo \rightarrow classNo\\
 Society: &societyNo \rightarrow societyName,
-\\& societyNo \rightarrow societyYear, 
+\\& societyNo \rightarrow societyYear,
 \\&societyNo \rightarrow societyLoc\\
 Class: &classNo \rightarrow className,
 \\& classNo \rightarrow departNo,
@@ -62,12 +62,12 @@ $$
 根据分析，我们构建的ER图如下：
 
 <center>
-	<img style="padding:10px; background-color:#fff; " src="..\ER.svg">
-	<br>
-	<div style="display: inline-block; color: #000; padding: 2px;">图2</div> 
+ <img style="padding:10px; background-color:#fff; " src="..\ER.svg">
+ <br>
+ <div style="display: inline-block; color: #000; padding: 2px;">图2</div>
 </center>
 
-其中，班级与学生的关系是`1:n`，学会与学生的关系是 `m:n`，而系与班级的关系是 `1:n`。 
+其中，班级与学生的关系是`1:n`，学会与学生的关系是 `m:n`，而系与班级的关系是 `1:n`。
 
 ### 2.2 系统实现
 
@@ -149,8 +149,11 @@ CREATE TABLE Dormitory(
 ```SQL
 CREATE OR REPLACE VIEW NAME_SOCIETY AS
 (
-  SELECT Association.societyNo, Association.societyName Name, COUNT(DISTINCT Student.stuNo) Num
-  FROM Association LEFT OUTER JOIN JoinStatus ON(Association.societyNo=JoinStatus.societyNo) LEFT OUTER JOIN Student ON(JoinStatus.stuNo=Student.stuNo)
+  SELECT Association.societyNo, Association.societyName Name, 
+    COUNT(DISTINCT Student.stuNo) Num
+  FROM Association 
+    LEFT OUTER JOIN JoinStatus ON(Association.societyNo=JoinStatus.societyNo) 
+    LEFT OUTER JOIN Student ON(JoinStatus.stuNo=Student.stuNo)
   GROUP BY societyNo
 );
 ```
@@ -158,6 +161,7 @@ CREATE OR REPLACE VIEW NAME_SOCIETY AS
 #### 2.2.3 触发器实现
 
 根据每个班的学生变动情况自动增减班级表和系表的人数字段的值，以完成要求的后端设计要求。
+
 ##### 2.2.3.1 增加学生数量触发器
 
 ```SQL
@@ -276,7 +280,8 @@ BEGIN
 
     SELECT COUNT(*) INTO real_num
     FROM Student, Class, Department
-    WHERE Student.classNo=Class.classNo AND Class.departNo=Department.departNo AND Department.departNo=id;
+    WHERE Student.classNo=Class.classNo AND Class.departNo=Department.departNo 
+      AND Department.departNo=id;
 
     IF real_num!=num THEN
       UPDATE Department
