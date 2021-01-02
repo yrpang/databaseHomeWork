@@ -23,10 +23,11 @@
 系统整体定位为一个web项目，整体架构如下图1所示。
 
 <center>
-  <img style="padding:10px; background-color:#fff; " src="ER.svg">
+  <img style="background-color:#fff; height:300px;" src="main.png">
   <br>
   <div style="display: inline-block; color: #000; padding: 2px;">图1</div>
 </center>
+
 
 系统前端采用微信小程序，后端使用 `flask` 框架，数据库选用 `MySQL5.7` 。
 
@@ -41,10 +42,12 @@
 根据[1-任务要求](#1-任务要求)中的需求进行分析，得出系统中共包含四个实体，分别为：学生、班级、学会和系，根据实体间关系构建的ER图并进行优化，最终结果如下(图2)：
 
 <center>
- <img style="padding:10px; background-color:#fff; " src="ER.svg">
+ <img style="padding:10px; background-color:#fff;" src="ER.svg">
  <br>
  <div style="display: inline-block; color: #000; padding: 2px;">图2</div>
 </center>
+
+
 
 如上图2所示，班级与学生、系与班级的关系为 `1:n`（一对多），学会与学生的关系是多对多关系 `m:n`（多对多）。
 
@@ -415,28 +418,35 @@ mysql> describe Student;
 用户界面如下(图3、4、5、6)
 
 <center>
-  <img style="background-color:#fff; height:400px;" src="img1.png">
-  <br>
-  <div style="display: inline-block; color: #000; padding: 2px;">图3</div>
+  <div >
+    <div style="display:inline-block;">
+      <img style="background-color:#fff; height:400px;" src="img1.png">
+  		<br>
+  		<div style="display: inline-block; color: #000; padding: 2px;">图3</div> 
+    </div>
+    <div style=" display:inline-block;">
+      <img style="background-color:#fff; height:400px;" src="img2.png">
+    	<br>
+    	<div style="display: inline-block; color: #000; padding: 2px;">图4</div>
+    </div>
+  </div>
+</center>
+<center>
+  <div >
+    <div style="display:inline-block;">
+      <img style="background-color:#fff; height:400px;" src="img3.png">
+  		<br>
+  		<div style="display: inline-block; color: #000; padding: 2px;">图5</div> 
+    </div>
+    <div style=" display:inline-block;">
+      <img style="background-color:#fff; height:400px;" src="img4.png">
+    	<br>
+    	<div style="display: inline-block; color: #000; padding: 2px;">图6</div>
+    </div>
+  </div>
 </center>
 
-<center>
-  <img style="background-color:#fff; height:400px;" src="img2.png">
-  <br>
-  <div style="display: inline-block; color: #000; padding: 2px;">图4</div>
-</center>
 
-<center>
-  <img style="background-color:#fff; height:400px;" src="img3.png">
-  <br>
-  <div style="display: inline-block; color: #000; padding: 2px;">图5</div>
-</center>
-
-<center>
-  <img style="background-color:#fff; height:400px;" src="img4.png">
-  <br>
-  <div style="display: inline-block; color: #000; padding: 2px;">图6</div>
-</center>
 
 ## 7 小组分工情况
 
