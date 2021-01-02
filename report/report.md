@@ -42,7 +42,7 @@
 根据[1-任务要求](#1-任务要求)中的需求进行分析，得出系统中共包含四个实体，分别为：学生、班级、学会和系，根据实体间关系构建的ER图并进行优化，最终结果如下(图2)：
 
 <center>
- <img style="padding:10px; background-color:#fff;" src="ER.svg">
+ <img style="padding:10px; background-color:#fff; height:400px" src="ER.svg">
  <br>
  <div style="display: inline-block; color: #000; padding: 2px;">图2</div>
 </center>
@@ -450,19 +450,18 @@ mysql> describe Student;
 
 ## 7 小组分工情况
 
-庞义人(@yrpang)负责项目整体组织协调、**前端微信小程序**、**后端班级管理**实现
-陈禾嘉(@HarryXD2018)负责**数据库设计及E-R图绘制**和**后端学生管理**实现
-胡道汝(@hai-bo1017)负责文档撰写部分组织协调及**后端系管理**实现
-唐坤(@lyxybrtejw)负责**后端学会管理**实现
+* 庞义人(@yrpang)负责项目整体组织协调、**前端微信小程序**、**后端班级管理**实现
+* 陈禾嘉(@HarryXD2018)负责**数据库设计及E-R图绘制**和**后端学生管理**实现
+* 胡道汝(@hai-bo1017)负责文档撰写部分组织协调及**后端系管理**实现
+* 唐坤(@lyxybrtejw)负责**后端学会管理**实现
 
 另附GitHub commit记录如下(图7):
 
 <center>
-  <img style="background-color:#fff; width:80%; height:80%;" src="commits.png">
+  <img style="background-color:#fff; height:280px;" src="commits.png">
   <br>
   <div style="display: inline-block; color: #000; padding: 2px;">图7</div>
 </center>
-
 
 
 ## 8 小组工作总结
